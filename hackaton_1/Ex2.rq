@@ -1,0 +1,67 @@
+#the amazing 🇬🇧 and 🇺🇸 guitar players and keyboardists born between 1940 and 1990 that played Progressive Rock or Post-Rock music
+#retreiving data from the dbpedia SPARQL endpoint <http://dbpedia.org/sparql/>
+
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/> 
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?name ?instrument ?musicGenre YEAR(?birthDate) AS ?birthYear
+{
+	{?person a dbo:MusicalArtist ; #person who is a musical artist
+			dbo:genre ?musicGenre;
+			dbp:instrument ?instrument ; # plays an instrument
+			dbo:birthPlace <http://dbpedia.org/resource/United_Kingdom> ; #was born UK
+			dbp:name ?name ; #has a name
+			dbo:birthDate ?birthDate} # has a birth date
+	UNION
+	#same as above but with USA as birth place
+	{?person a dbo:MusicalArtist ; 
+			dbo:genre ?musicGenre ;
+			dbp:instrument ?instrument ;
+			dbo:birthPlace <http://dbpedia.org/resource/United_States> ;
+			dbp:name ?name ;
+			dbo:birthDate ?birthDate}
+# Filter by instruments that ar guitars or musical keyboards and birth year is between 1970 and 1990
+  FILTER ((?musicGenre = <http://dbpedia.org/resource/Progressive_rock> || ?musicGenre = <http://dbpedia.org/resource/Post-rock>) 
+			&& (?instrument = <http://dbpedia.org/resource/Guitar> || ?instrument = <http://dbpedia.org/resource/Musical_keyboard>) 
+			&& YEAR(?birthDate) > 1940 && YEAR(?birthDate) < 1990)
+} ORDER BY (?birthYear)
+
+
+#Progressive Rock or Post-Rock music albums released after 2000 by Icelandic or Finish groups
+
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/> 
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?albumName ?musicGenre ?finalHomeCountry ?releaseDate
+WHERE
+{
+	?album a <http://dbpedia.org/ontology/Album> ; #entity that is of type album
+		   dbp:name ?albumName ;	
+		   dbp:released ?releaseDate;
+		   dbp:artist ?group ; #the musical group that released the album
+		   dbp:genre ?musicGenre .
+	?group a <http://dbpedia.org/ontology/Group> ;
+			dbo:hometown ?hometownOrCountry.
+#some groups have the country set as their hometown instead of a town so i need to get the country of that town
+	optional{ ?hometownOrCountry dbo:country ?homeCountry }
+	BIND(IF(BOUND(?homeCountry), ?homeCountry, ?hometownOrCountry) as ?finalHomeCountry)
+# tried to filter by YEAR(?releaseDate) > 2000 but some albums have he dbp:released as an integer representing the year and YEAR(?releaseDate) returns an error.
+# I tried to find a solution for this probmel but i did not succeed
+	FILTER ((?musicGenre = <http://dbpedia.org/resource/Progressive_rock> || ?musicGenre = <http://dbpedia.org/resource/Post-rock>)
+			&& (?finalHomeCountry = <http://dbpedia.org/resource/Finland> || ?finalHomeCountry = <http://dbpedia.org/resource/Iceland>))
+}
+
+
+
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?person ?gen
+{
+	?person a dbo:MusicalArtist ;
+			 rdf:type ?pers
+	OPTIONAL { ?pers foaf:Person ?prs}
+}
+LIMIT 5
