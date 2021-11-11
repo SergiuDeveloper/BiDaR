@@ -1,0 +1,104 @@
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <http://schema.org/> .
+
+
+schema:GenreShape
+	a sh:NodeShape;
+	sh:targetClass mo:Genre;
+	sh:property [
+    	sh:path foaf:name;
+        sh:datatype xsd:string;
+        sh:minCount 1;
+        sh:maxCount 1;
+   	];
+	sh:property [
+    	sh:path dbo:MusicGenre;
+        sh:datatype dbo:MusicGenre;
+        sh:pattern "^https://dbpedia.org/page";
+        sh:minCount 1;
+        sh:maxCount 1;
+   	];
+.
+schema:SubGenreShape
+	a sh:NodeShape;
+	sh:targetClass mo:SubGenre;
+	sh:property [
+    	sh:path foaf:name;
+        sh:datatype xsd:string;
+        sh:minCount 1;
+        sh:maxCount 1;
+   	];
+	sh:property [
+    	sh:path dbo:subClassOf;
+        sh:datatype mo:Genre;
+        sh:minCount 1;
+        sh:maxCount 5;
+   	];
+	sh:property [
+    	sh:path dbo:influencedBy;
+        sh:datatype mo:SubGenre;
+        sh:minCount 0;
+        sh:maxCount 5;
+   	];
+.
+schema:MusicArtistShape
+	a sh:NodeShape;
+	sh:targetClass mo:MusicArtist;
+	sh:property [
+    	sh:path foaf:name;
+        sh:datatype xsd:string;
+        sh:minCount 1;
+        sh:maxCount 1;
+   	];
+	sh:property [
+    	sh:path dbo:SubGenre;
+        sh:datatype mo:SubGenre;
+        sh:minCount 1;
+        sh:maxCount 5;
+   	];
+.
+schema:PersonShape
+	a sh:NodeShape;
+	sh:targetClass dbo:Person;
+	sh:property [
+    	sh:path foaf:name;
+        sh:datatype xsd:string;
+        sh:minCount 1;
+        sh:maxCount 1;
+   	];
+	sh:property [
+    	sh:path foaf:personality;
+        sh:datatype xsd:string;
+        sh:in ("suave" "brave");
+        sh:minCount 1;
+        sh:maxCount 1;
+   	];
+	sh:property [
+    	sh:path foaf:mentalState;
+        sh:datatype xsd:string;
+        sh:in ("anger" "disgust" "fear" "happiness" "sadness" "surprise");
+        sh:minCount 1;
+        sh:maxCount 1;
+   	];
+	sh:property [
+    	sh:path foaf:likes;
+        sh:datatype mo:MusicArtist;
+        sh:minCount 0;
+        sh:maxCount 5;
+   	];
+	sh:property [
+    	sh:path foaf:dislikes;
+        sh:datatype mo:MusicArtist;
+        sh:minCount 0;
+        sh:maxCount 5;
+   	];
+.

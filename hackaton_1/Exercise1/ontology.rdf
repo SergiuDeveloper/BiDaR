@@ -1,0 +1,178 @@
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <http://schema.org/> .
+
+
+<AnnaWorthy>
+	a dbo:Person;
+	foaf:name "Anna Worthy";
+	foaf:personality "brave";
+	foaf:mentalState "fear";
+	foaf:likes <Grimes>;
+	foaf:likes <LouisArmstrong>;
+	foaf:likes <Grimes>;
+	foaf:dislikes <Conception>;
+.
+<DanChamberlain>
+	a dbo:Person;
+	foaf:name "Dan Chamberlain";
+	foaf:personality "suave";
+	foaf:mentalState "disgust";
+	foaf:likes <Conception>;
+	foaf:likes <LynyrdSkynyrd>;
+	foaf:dislikes <FrankSinatra>;
+	foaf:dislikes <MJ>;
+	foaf:dislikes <JohnColtrane>;
+.
+<JoeSnowden>
+	a dbo:Person;
+	foaf:name "Joe Snowden";
+	foaf:personality "suave";
+	foaf:mentalState "fear";
+	foaf:likes <TheCure>;
+	foaf:likes <LynyrdSkynyrd>;
+	foaf:likes <MJ>;
+	foaf:dislikes <Price>;
+	foaf:dislikes <Grimes>;
+	foaf:dislikes <LouisArmstrong>;
+.
+
+<Pop>
+	a mo:Genre;
+	foaf:name "Pop";
+	dbo:MusicGenre <https://dbpedia.org/page/Pop>;
+.
+<Rock>
+	a mo:Genre;
+	foaf:name "Rock";
+	dbo:MusicGenre <https://dbpedia.org/page/Rock>;
+.
+<Jazz>
+	a mo:Genre;
+	foaf:name "Jazz";
+	dbo:MusicGenre <https://dbpedia.org/page/Jazz>;
+.
+
+<PopRock>
+	a mo:SubGenre;
+	foaf:name "Pop Rock";
+	rdfs:subClassOf <Pop>;
+	rdfs:subClassOf <Rock>;
+	dbo:influencedBy <AltRock>
+.
+<ArtPop>
+	a mo:SubGenre;
+	foaf:name "Art Pop";
+	rdfs:subClassOf <Pop>;
+.
+<SynthPop>
+	a mo:SubGenre;
+	foaf:name "Synth Pop";
+	rdfs:subClassOf <Pop>;
+	dbo:influencedBy <ArtPop>;
+.
+
+<AltRock>
+	a mo:Genre;
+	foaf:name "Alternative Rock";
+	rdfs:subClassOf <Rock>;
+	dbo:influencedBy <HardRock>;
+.
+<ProgRock>
+	a mo:SubGenre;
+	foaf:name "Progressive Rock";
+	rdfs:subClassOf <Rock>;
+	dbo:influencedBy <AltRock>;
+	dbo:influencedBy <HardRock>;
+	dbo:influencedBy <FreeJazz>;
+.
+<HardRock>
+	a mo:SubGenre;
+	foaf:name "Hard Rock";
+	rdfs:subClassOf <Rock>;
+.
+
+<FreeJazz>
+	a mo:SubGenre;
+	foaf:name "Free Jazz";
+	rdfs:subClassOf <Jazz>;
+.
+<SmoothJazz>
+	a mo:SubGenre;
+	foaf:name "Smooth Jazz";
+	rdfs:subClassOf <Jazz>;
+.
+<Swing>
+	a mo:SubGenre;
+	foaf:name "Swing";
+	rdfs:subClassOf <Jazz>;
+	dbo:influencedBy <SmoothJazz>;
+.
+
+<MJ>
+	a mo:MusicArtist;
+	foaf:name "Michael Jackson";
+	mo:SubGenre <PopRock>;
+	mo:SubGenre <AltRock>;
+.
+<Prince>
+	a mo:MusicArtist;
+	foaf:name "Prince";
+	mo:SubGenre <PopRock>;
+	mo:SubGenre <AltRock>;
+.
+<Grimes>
+	a mo:MusicArtist;
+	foaf:name "Grimes";
+	mo:SubGenre <ArtPop>;
+	mo:SubGenre <SynthPop>;
+	mo:SubGenre <AltRock>;
+.
+<DepecheMode>
+	a mo:MusicArtist;
+	foaf:name "Depeche Mode";
+	mo:SubGenre <SynthPop>;
+	mo:SubGenre <AltRock>;
+.
+
+<TheCure>
+	a mo:MusicArtist;
+	foaf:name "The Cure";
+	mo:SubGenre <AltRock>;
+.
+<Conception>
+	a mo:MusicArtist;
+	foaf:name "Conception";
+	mo:SubGenre <ProgRock>;
+	mo:SubGenre <AltRock>;
+.
+<LynyrdSkynyrd>
+	a mo:MusicArtist;
+	foaf:name "Lynyrd Skynyrd";
+	mo:SubGenre <HardRock>;
+.
+
+<JohnColtrane>
+	a mo:MusicArtist;
+	foaf:name "John Coltrane";
+	mo:SubGenre <FreeJazz>;
+.
+<LouisArmstrong>
+	a mo:MusicArtist;
+	foaf:name "Louis Armstrong";
+	mo:SubGenre <SmoothJazz>;
+	mo:SubGenre <FreeJazz>;
+.
+<FrankSinatra>
+	a mo:MusicArtist;
+	foaf:name "Frank Sinatra";
+	mo:SubGenre <Swing>;
+.
