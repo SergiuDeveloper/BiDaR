@@ -1,3 +1,4 @@
+#a) part 1
 #the amazing 🇬🇧 and 🇺🇸 guitar players and keyboardists born between 1940 and 1990 that played Progressive Rock or Post-Rock music
 #retreiving data from the dbpedia SPARQL endpoint <http://dbpedia.org/sparql/>
 
@@ -28,7 +29,8 @@ SELECT ?name ?instrument ?musicGenre YEAR(?birthDate) AS ?birthYear
 } ORDER BY (?birthYear)
 
 
-#Progressive Rock or Post-Rock music albums released after 2000 by Icelandic or Finish groups
+#a) part 2
+#Progressive Rock or Post-Rock music albums released by Icelandic or Finish groups (filter after 2000 not done)
 
 PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX dbp: <http://dbpedia.org/property/> 
@@ -54,6 +56,8 @@ WHERE
 }
 
 
+#b)
+#I was unable to get the gender of the MusicalArtist for some reason >:(
 
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -64,4 +68,5 @@ SELECT ?person ?gen
 			 rdf:type ?pers
 	OPTIONAL { ?pers foaf:Person ?prs}
 }
-LIMIT 5
+
+#didn't have enough time for c) and d) :(
