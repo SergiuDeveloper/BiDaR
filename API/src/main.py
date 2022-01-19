@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from lib.TextProcessor import TextProcessor
 from lib.SparqlProcessor import SparqlProcessor
@@ -8,9 +9,10 @@ PORT = 8080
 
 
 app = Flask(__name__)
+CORS(app)
 
 
-@app.get('/semantic_web_data')
+@app.post('/semantic_web_data')
 def semantic_web_data():
     text = request.data.decode('utf-8')
 
@@ -21,6 +23,7 @@ def semantic_web_data():
 
     query_data = SparqlProcessor.query_information_multithreaded(nouns, language, resultsLimit, searchDepth)
     query_data = list(query_data)
+
     return jsonify(query_data)
 
 

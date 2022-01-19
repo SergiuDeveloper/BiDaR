@@ -1,0 +1,29 @@
+<html>
+
+<head>
+
+    <script type="text/javascript" src="js/vis.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
+
+    <link href="css/vis.css" rel="stylesheet" type="text/css" />
+    <link href="css/base.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <div>
+        <label for="textInput">Text:</label>
+        <input type="text" id="textInput" name="textInput"><br><br>
+        <label for="maxResults">Maximum results per concept:</label>
+        <input type="text" id="maxResults" name="maxResults"><br><br>
+        <label for="searchDepth">Search depth:</label>
+        <input type="text" id="searchDepth" name="searchDepth"><br><br>
+        <input type="submit" value="Submit" onclick="submitOnClick('network')"><br><br>
+    </div>
+
+    <div id="network"></div>
+
+</body>
+
+</html>
