@@ -64,9 +64,29 @@ class OntologyProcessor:
 
     def query_all_data(self, name):
         person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
-        results = list(self.__graph.triples((person, None, None)))
-        results.extend(list(self.__graph.triples((None, None, person))))
-        return results
+        results1 = list(self.__graph.triples((person, None, None)))
+        results2 = list(self.__graph.triples((None, None, person)))
+
+        results1 = [(
+            re.split('/|#', result[0].n3())[-1][:-1].replace('_', ' '),
+            re.split('/|#', result[1].n3())[-1][:-1].replace('_', ' '),
+            re.split('/|#', result[2].n3())[-1][:-1].replace('_', ' ')
+        ) for result in results1]
+        results2 = [(
+            re.split('/|#', result[0].n3())[-1][:-1].replace('_', ' '),
+            re.split('/|#', result[1].n3())[-1][:-1].replace('_', ' '),
+            re.split('/|#', result[2].n3())[-1][:-1].replace('_', ' ')
+        ) for result in results2]
+
+        results1.extend(results2)
+
+        results1 = [(
+            result[0][1:] if result[0][0] == '\"' else result[0],
+            result[1][1:] if result[1][0] == '\"' else result[1],
+            result[2][1:] if result[2][0] == '\"' else result[2]
+        ) for result in results1]
+
+        return results1
 
     def add_person(self, name, age, gender, country, city, job_title, language, friends, interests, skills, favorite_artists):
         self.__graph_lock.acquire()

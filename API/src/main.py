@@ -36,31 +36,32 @@ def semantic_web_data():
 
 @app.post('/query_all_data')
 def query_all_data():
-    name = request.json['name']
+    name = request.get_json(force=True)['name']
     result = ontology_processor.query_all_data(name)
     return jsonify(result)
 
 @app.post('/query_interests')
 def query_interests():
-    name = request.json['name']
+    name = request.get_json(force=True)['name']
     result = ontology_processor.query_interests(name)
     return jsonify(result)
 
 @app.post('/add_person')
 def add_person():
-    result = ontology_processor.add_person(
-        request.json['name'],
-        request.json['age'],
-        request.json['gender'],
-        request.json['country'],
-        request.json['city'],
-        request.json['jobTitle'],
-        request.json['language'],
-        request.json['friends'],
-        request.json['interests'],
-        request.json['skills'],
-        request.json['favorite_artists']
+    ontology_processor.add_person(
+        request.get_json(force=True)['name'],
+        request.get_json(force=True)['age'],
+        request.get_json(force=True)['gender'],
+        request.get_json(force=True)['country'],
+        request.get_json(force=True)['city'],
+        request.get_json(force=True)['jobTitle'],
+        request.get_json(force=True)['language'],
+        request.get_json(force=True)['friends'],
+        request.get_json(force=True)['interests'],
+        request.get_json(force=True)['skills'],
+        request.get_json(force=True)['favoriteArtists']
     )
+    result = ontology_processor.query_all_data(request.get_json(force=True)['name'])
     return jsonify(result)
 
 def exceptions_hook(exc_type, exc_value, exc_traceback, ontology_processor):
