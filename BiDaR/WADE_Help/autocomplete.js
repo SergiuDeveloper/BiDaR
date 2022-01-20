@@ -115,7 +115,8 @@ function debounce(func, wait = 150, early = false) {
     };
 }
 
-const element = document.querySelector('.suggestions');
-element.addEventListener("input", debounce(function(e) {
-    fetch_autocomplete_user_suggestions(e);
-}));
+// const element = document.querySelector('.suggestions');
+// console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+// element.addEventListener("input", debounce(function(e) {
+//     fetch_autocomplete_user_suggestions(e);
+// }));

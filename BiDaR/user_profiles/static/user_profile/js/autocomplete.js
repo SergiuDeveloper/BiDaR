@@ -46,8 +46,8 @@ function autocomplete(inp, arr) {
     for (i = 0; i < arr.length; i++) {
         // create a DIV element for each matching element
         element_div = document.createElement("DIV");
-        element_div.innerHTML = arr[i];
-        element_div.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";  // insert a input field that will hold the current array item's value
+        element_div.innerHTML = arr[i]["label"]["value"];
+        element_div.innerHTML += "<input type='hidden' value='" + arr[i]["label"]["value"] + "'>";  // insert a input field that will hold the current array item's value
         // execute a function when someone clicks on the item value (DIV element)
         element_div.addEventListener("click", function (e) {
             inp.value = this.getElementsByTagName("input")[0].value;  // insert the value for the autocomplete text field
@@ -86,6 +86,7 @@ function autocomplete(inp, arr) {
 };
 
 function fetch_autocomplete_user_suggestions(event){
+    console.log("call");
     const target_element = event.target;
     let input = target_element.value;
     if (input.trim() != '') {
