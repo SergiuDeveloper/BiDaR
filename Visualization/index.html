@@ -1,0 +1,69 @@
+<html>
+
+<head>
+
+    <script type="text/javascript" src="js/vis.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
+
+    <link href="css/vis.css" rel="stylesheet" type="text/css" />
+    <link href="css/base.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <div id="forms">
+        <div class='inputForm'>
+            <label for="textInput">Text:</label>
+            <input type="text" id="textInput" name="textInput"><br>
+            <label for="maxResults">Maximum results per concept:</label>
+            <input type="text" id="maxResults" name="maxResults"><br>
+            <label for="searchDepth">Search depth:</label>
+            <input type="text" id="searchDepth" name="searchDepth"><br>
+            <input type="submit" value="Query Facts" onclick="queryFactsOnClick('network')"><br>
+        </div>
+
+        <div class='inputForm'>
+            <label for="nameInput">Name:</label>
+            <input type="text" id="nameInput" name="nameInput"><br>
+            <label for="ageInput">Age:</label>
+            <input type="text" id="ageInput" name="ageInput"><br>
+            <label for="genderInput">Gender:</label>
+            <input type="text" id="genderInput" name="genderInput"><br>
+            <label for="countryInput">Country:</label>
+            <input type="text" id="countryInput" name="countryInput"><br>
+            <label for="cityInput">City:</label>
+            <input type="text" id="cityInput" name="cityInput"><br>
+            <label for="jobTitleInput">Job title:</label>
+            <input type="text" id="jobTitleInput" name="jobTitleInput"><br>
+            <label for="languageInput">Language:</label>
+            <input type="text" id="languageInput" name="languageInput"><br>
+            <label for="friendsInput">Friends (comma-separated):</label>
+            <input type="text" id="friendsInput" name="friendsInput"><br>
+            <label for="interestsInput">Interests (comma-separated):</label>
+            <input type="text" id="interestsInput" name="interestsInput"><br>
+            <label for="skillsInput">Skills (comma-separated):</label>
+            <input type="text" id="skillsInput" name="skillsInput"><br>
+            <label for="favoriteArtistsInput">Favorite artists (comma-separated):</label>
+            <input type="text" id="favoriteArtistsInput" name="favoriteArtistsInput"><br>
+            <input type="submit" value="Add person" onclick="addPersonOnClick('network')"><br>
+        </div>
+
+        <div class='inputForm'>
+            <label>Name:</label>
+            <select id="selectPerson"></select>
+            <input type="submit" value="Query all facts about person" onclick="queryAllFactsOnClick('network')"><br>
+        </div>
+
+        <div class='inputForm'>
+            <label>Name:</label>
+            <select id="selectPerson2"></select>
+            <input type="submit" value="Get interesting facts for person" onclick="getInterestingFactsOnClick('network')"><br>
+        </div>
+    </div>
+
+    <div id="network"></div>
+
+</body>
+
+</html>
