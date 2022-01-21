@@ -64,6 +64,11 @@ def add_person():
     result = ontology_processor.query_all_data(request.get_json(force=True)['name'])
     return jsonify(result)
 
+@app.get('/get_all_persons')
+def get_all_persons():
+    persons = ontology_processor.get_all_persons()
+    return jsonify(persons)
+
 def exceptions_hook(exc_type, exc_value, exc_traceback, ontology_processor):
     ontology_processor.deactivate_backup_daemon()
 

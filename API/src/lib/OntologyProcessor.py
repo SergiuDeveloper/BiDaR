@@ -50,6 +50,13 @@ class OntologyProcessor:
     def deactivate_backup_daemon(self):
         self.__backup_daemon_running = False
 
+    def get_all_persons(self):
+        triples = self.__graph.triples((None, RDF.type, FOAF.Person))
+        triples_knows = self.__graph.triples((None, SDO.knows, None))
+        persons = set([re.split('/|#', triple[0].n3())[-1].replace('_', ' ')[:-1] for triple in triples])
+        persons_knows = set([re.split('/|#', triple[0].n3())[-1].replace('_', ' ')[:-1] for triple in triples_knows])
+        return list(persons.intersection(persons_knows))
+
     def query_interests(self, name):
         person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
         interests = []
@@ -60,7 +67,7 @@ class OntologyProcessor:
         
         sparql_processor = SparqlProcessor()
         results = sparql_processor.query_information_multithreaded(interests, 'en', 3, 3)
-        return results
+        return list(set(results))
 
     def query_all_data(self, name):
         person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
@@ -81,12 +88,12 @@ class OntologyProcessor:
         results1.extend(results2)
 
         results1 = [(
-            result[0][1:] if result[0][0] == '\"' else result[0],
-            result[1][1:] if result[1][0] == '\"' else result[1],
-            result[2][1:] if result[2][0] == '\"' else result[2]
+            result[0][1:] if len(result[0][1:]) == 0 else result[0][1:] if result[0][0] == '\"' else result[0],
+            result[1][1:] if len(result[1][1:]) == 0 else result[1][1:] if result[1][0] == '\"' else result[1],
+            result[2][1:] if len(result[2][1:]) == 0 else result[2][1:] if result[2][0] == '\"' else result[2]
         ) for result in results1]
 
-        return results1
+        return list(set(results1))
 
     def add_person(self, name, age, gender, country, city, job_title, language, friends, interests, skills, favorite_artists):
         self.__graph_lock.acquire()

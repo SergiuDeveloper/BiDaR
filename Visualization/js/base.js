@@ -79,6 +79,52 @@ function addPersonOnClick(networkElementId) {
         'skills': skillsInput,
         'favoriteArtists': favoriteArtistsInput
     }));
+
+    getPersons();
+}
+
+function queryAllFactsOnClick(networkElementId) {
+    var nameInput = document.getElementById('selectPerson').value;
+
+    if (nameInput.length == 0) {
+        return;
+    }
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            var responseText = xmlHttp.responseText;
+            var triples = JSON.parse(responseText)
+            populateGraph(networkElementId, triples)
+        }
+    }
+    xmlHttp.open('POST', `${URL}/query_all_data`, true);
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.send(JSON.stringify({
+        'name': nameInput
+    }));
+}
+
+function getInterestingFactsOnClick(networkElementId) {
+    var nameInput = document.getElementById('selectPerson2').value;
+
+    if (nameInput.length == 0) {
+        return;
+    }
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            var responseText = xmlHttp.responseText;
+            var triples = JSON.parse(responseText)
+            populateGraph(networkElementId, triples)
+        }
+    }
+    xmlHttp.open('POST', `${URL}/query_interests`, true);
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.send(JSON.stringify({
+        'name': nameInput
+    }));
 }
 
 function populateGraph(networkElementId, triples) {
@@ -89,7 +135,10 @@ function populateGraph(networkElementId, triples) {
         entitiesSet.add(triple[0]);
         entitiesSet.add(triple[2]);
 
-        predicates[[triple[0], triple[2]]] = triple[1];
+        if (!([triple[0], triple[2]] in predicates)) {
+            predicates[[triple[0], triple[2]]] = []
+        }
+        predicates[[triple[0], triple[2]]].push(triple[1]);
     }
     var entitiesList = [...entitiesSet];
 
@@ -112,7 +161,7 @@ function populateGraph(networkElementId, triples) {
         edgesList.push({
             from: fromNode,
             to: toNode,
-            label: predicates[[triple[0], triple[2]]],
+            label: predicates[[triple[0], triple[2]]].shift(),
             width: 1
         });
     }
@@ -137,3 +186,32 @@ function populateGraph(networkElementId, triples) {
 
     new vis.Network(container, data, options);
 }
+
+function getPersons() {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            var responseText = xmlHttp.responseText;
+            var persons = JSON.parse(responseText);
+
+            var select1 = document.getElementById('selectPerson');
+            var select2 = document.getElementById('selectPerson2');
+
+            for (var i = 0; i < select1.options.length; i++) {
+                select1.remove(i);
+            }
+            for (var i = 0; i < select2.options.length; i++) {
+                select2.remove(i);
+            }
+            for (var i = 0; i < persons.length; i++) {
+                select1.options[i] = new Option(persons[i], persons[i]);
+                select2.options[i] = new Option(persons[i], persons[i]);
+            }
+        }
+    }
+    xmlHttp.open('GET', `${URL}/get_all_persons`, true);
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.send(null);
+}
+
+window.onload = getPersons();
