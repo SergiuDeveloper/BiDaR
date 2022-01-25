@@ -4,6 +4,68 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:schema="https://schema.org/"
 >
+  <rdf:Description rdf:about="http://example.org/person/hfg">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>hfg</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/language/lilg">
+    <rdf:type rdf:resource="https://schema.org/language"/>
+    <foaf:name>lilg</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sergiu3">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>Sergiu3</foaf:name>
+    <foaf:age>23</foaf:age>
+    <foaf:gender>ewqeqre</foaf:gender>
+    <schema:Country rdf:resource="http://example.org/country/dafdsf"/>
+    <schema:City rdf:resource="http://example.org/city/j"/>
+    <schema:jobTitle rdf:resource="http://example.org/jobTitle/lkh"/>
+    <schema:language rdf:resource="http://example.org/language/lilg"/>
+    <schema:knows rdf:resource="http://example.org/person/hg"/>
+    <schema:knows rdf:resource="http://example.org/person/gh"/>
+    <schema:knows rdf:resource="http://example.org/person/gf_"/>
+    <schema:knows rdf:resource="http://example.org/person/g_h"/>
+    <schema:knows rdf:resource="http://example.org/person/gfh_"/>
+    <schema:knows rdf:resource="http://example.org/person/fg"/>
+    <schema:knows rdf:resource="http://example.org/person/h_fg"/>
+    <schema:knows rdf:resource="http://example.org/person/hfghfghfg_hfg_hgf"/>
+    <schema:knows rdf:resource="http://example.org/person/"/>
+    <schema:knows rdf:resource="http://example.org/person/hfg"/>
+    <schema:knows rdf:resource="http://example.org/person/h_fgh_fgh"/>
+    <foaf:interest rdf:resource="http://example.org/interest/hkj"/>
+    <foaf:interest rdf:resource="http://example.org/interest/sdf_sd_f,sd_fsd"/>
+    <foaf:interest rdf:resource="http://example.org/interest/fsd"/>
+    <schema:skills rdf:resource="http://example.org/skill/dsf"/>
+    <schema:skills rdf:resource="http://example.org/skill/sd__"/>
+    <schema:skills rdf:resource="http://example.org/skill/ghdh_g"/>
+    <schema:skills rdf:resource="http://example.org/skill/df"/>
+    <schema:artist rdf:resource="http://example.org/artist/sdf,hh,d"/>
+    <schema:artist rdf:resource="http://example.org/artist/"/>
+    <schema:artist rdf:resource="http://example.org/artist/dffdhf"/>
+    <schema:artist rdf:resource="http://example.org/artist/fdg"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Andrei_Ghiran">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>Andrei Ghiran</foaf:name>
+    <foaf:age>23</foaf:age>
+    <foaf:gender>Male</foaf:gender>
+    <schema:Country rdf:resource="http://example.org/country/Romania"/>
+    <schema:City rdf:resource="http://example.org/city/Galati"/>
+    <schema:jobTitle rdf:resource="http://example.org/jobTitle/asdas"/>
+    <schema:language rdf:resource="http://example.org/language/English"/>
+    <schema:knows rdf:resource="http://example.org/person/asdasd"/>
+    <foaf:interest rdf:resource="http://example.org/interest/Video_Games"/>
+    <foaf:interest rdf:resource="http://example.org/interest/Nirvana"/>
+    <foaf:interest rdf:resource="http://dbpedia.org/resource/Queen_(band)"/>
+    <foaf:interest rdf:resource="http://dbpedia.org/resource/Foo_Fighters"/>
+    <foaf:interest rdf:resource="http://dbpedia.org/resource/Eminem"/>
+    <foaf:interest rdf:resource="http://dbpedia.org/resource/ABBA"/>
+    <foaf:interest rdf:resource="http://dbpedia.org/resource/ABBA_(album)"/>
+    <foaf:interest rdf:resource="http://dbpedia.org/resource/Category:ABBA"/>
+    <foaf:interest rdf:resource="file:///C:/facultate/WADE/BiDaR/API/data/ontology.rdf"/>
+    <schema:skills rdf:resource="http://example.org/skill/asdasd"/>
+    <schema:artist rdf:resource="http://example.org/artist/Elton_Jhon"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://example.org/person/Maria_Dragomiroiu6">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <foaf:name>Maria Dragomiroiu6</foaf:name>
@@ -23,136 +85,9 @@
     <schema:artist rdf:resource="http://example.org/artist/Best,Artists"/>
     <schema:artist rdf:resource="http://example.org/artist/Ever"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/gf_">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>gf </foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/Sergiu4">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>Sergiu4</foaf:name>
-    <foaf:age>23</foaf:age>
-    <foaf:gender>ewqeqre</foaf:gender>
-    <schema:Country rdf:resource="http://example.org/country/dafdsf"/>
-    <schema:City rdf:resource="http://example.org/city/j"/>
-    <schema:jobTitle rdf:resource="http://example.org/jobTitle/lkh"/>
-    <schema:language rdf:resource="http://example.org/language/lilg"/>
-    <schema:knows rdf:resource="http://example.org/person/hg"/>
-    <schema:knows rdf:resource="http://example.org/person/gh"/>
-    <schema:knows rdf:resource="http://example.org/person/gf_"/>
-    <schema:knows rdf:resource="http://example.org/person/g_h"/>
-    <schema:knows rdf:resource="http://example.org/person/gfh_"/>
-    <schema:knows rdf:resource="http://example.org/person/fg"/>
-    <schema:knows rdf:resource="http://example.org/person/h_fg"/>
-    <schema:knows rdf:resource="http://example.org/person/hfghfghfg_hfg_hgf"/>
-    <schema:knows rdf:resource="http://example.org/person/"/>
-    <schema:knows rdf:resource="http://example.org/person/hfg"/>
-    <schema:knows rdf:resource="http://example.org/person/h_fgh_fgh"/>
-    <foaf:interest rdf:resource="http://example.org/interest/hkj"/>
-    <foaf:interest rdf:resource="http://example.org/interest/sdf_sd_f,sd_fsd"/>
-    <foaf:interest rdf:resource="http://example.org/interest/fsd"/>
-    <schema:skills rdf:resource="http://example.org/skill/dsf"/>
-    <schema:skills rdf:resource="http://example.org/skill/sd__"/>
-    <schema:skills rdf:resource="http://example.org/skill/ghdh_g"/>
-    <schema:skills rdf:resource="http://example.org/skill/df"/>
-    <schema:artist rdf:resource="http://example.org/artist/sdf,hh,d"/>
-    <schema:artist rdf:resource="http://example.org/artist/"/>
-    <schema:artist rdf:resource="http://example.org/artist/dffdhf"/>
-    <schema:artist rdf:resource="http://example.org/artist/fdg"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://example.org/person/Sergiu2">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <foaf:name>Sergiu2</foaf:name>
-    <foaf:age>23</foaf:age>
-    <foaf:gender>ewqeqre</foaf:gender>
-    <schema:Country rdf:resource="http://example.org/country/dafdsf"/>
-    <schema:City rdf:resource="http://example.org/city/j"/>
-    <schema:jobTitle rdf:resource="http://example.org/jobTitle/lkh"/>
-    <schema:language rdf:resource="http://example.org/language/lilg"/>
-    <schema:knows rdf:resource="http://example.org/person/hg"/>
-    <schema:knows rdf:resource="http://example.org/person/gh"/>
-    <schema:knows rdf:resource="http://example.org/person/gf_"/>
-    <schema:knows rdf:resource="http://example.org/person/g_h"/>
-    <schema:knows rdf:resource="http://example.org/person/gfh_"/>
-    <schema:knows rdf:resource="http://example.org/person/fg"/>
-    <schema:knows rdf:resource="http://example.org/person/h_fg"/>
-    <schema:knows rdf:resource="http://example.org/person/hfghfghfg_hfg_hgf"/>
-    <schema:knows rdf:resource="http://example.org/person/"/>
-    <schema:knows rdf:resource="http://example.org/person/hfg"/>
-    <schema:knows rdf:resource="http://example.org/person/h_fgh_fgh"/>
-    <foaf:interest rdf:resource="http://example.org/interest/hkj"/>
-    <foaf:interest rdf:resource="http://example.org/interest/sdf_sd_f,sd_fsd"/>
-    <foaf:interest rdf:resource="http://example.org/interest/fsd"/>
-    <schema:skills rdf:resource="http://example.org/skill/dsf"/>
-    <schema:skills rdf:resource="http://example.org/skill/sd__"/>
-    <schema:skills rdf:resource="http://example.org/skill/ghdh_g"/>
-    <schema:skills rdf:resource="http://example.org/skill/df"/>
-    <schema:artist rdf:resource="http://example.org/artist/sdf,hh,d"/>
-    <schema:artist rdf:resource="http://example.org/artist/"/>
-    <schema:artist rdf:resource="http://example.org/artist/dffdhf"/>
-    <schema:artist rdf:resource="http://example.org/artist/fdg"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/Sergiu">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>Sergiu</foaf:name>
-    <foaf:age>23</foaf:age>
-    <foaf:gender>ewqeqre</foaf:gender>
-    <schema:Country rdf:resource="http://example.org/country/dafdsf"/>
-    <schema:City rdf:resource="http://example.org/city/j"/>
-    <schema:jobTitle rdf:resource="http://example.org/jobTitle/lkh"/>
-    <schema:language rdf:resource="http://example.org/language/lilg"/>
-    <schema:knows rdf:resource="http://example.org/person/hg"/>
-    <schema:knows rdf:resource="http://example.org/person/gh"/>
-    <schema:knows rdf:resource="http://example.org/person/gf_"/>
-    <schema:knows rdf:resource="http://example.org/person/g_h"/>
-    <schema:knows rdf:resource="http://example.org/person/gfh_"/>
-    <schema:knows rdf:resource="http://example.org/person/fg"/>
-    <schema:knows rdf:resource="http://example.org/person/h_fg"/>
-    <schema:knows rdf:resource="http://example.org/person/hfghfghfg_hfg_hgf"/>
-    <schema:knows rdf:resource="http://example.org/person/"/>
-    <schema:knows rdf:resource="http://example.org/person/hfg"/>
-    <schema:knows rdf:resource="http://example.org/person/h_fgh_fgh"/>
-    <foaf:interest rdf:resource="http://example.org/interest/hkj"/>
-    <foaf:interest rdf:resource="http://example.org/interest/sdf_sd_f,sd_fsd"/>
-    <foaf:interest rdf:resource="http://example.org/interest/fsd"/>
-    <schema:skills rdf:resource="http://example.org/skill/dsf"/>
-    <schema:skills rdf:resource="http://example.org/skill/sd__"/>
-    <schema:skills rdf:resource="http://example.org/skill/ghdh_g"/>
-    <schema:skills rdf:resource="http://example.org/skill/df"/>
-    <schema:artist rdf:resource="http://example.org/artist/sdf,hh,d"/>
-    <schema:artist rdf:resource="http://example.org/artist/"/>
-    <schema:artist rdf:resource="http://example.org/artist/dffdhf"/>
-    <schema:artist rdf:resource="http://example.org/artist/fdg"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/h_fgh_fgh">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>h fgh fgh</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/skill/dsf">
-    <rdf:type rdf:resource="https://schema.org/skills"/>
-    <foaf:name>dsf</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/Maria_Dragomiroiu">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>Maria Dragomiroiu</foaf:name>
-    <foaf:age>48</foaf:age>
-    <foaf:gender>Female</foaf:gender>
-    <schema:Country rdf:resource="http://example.org/country/Romania"/>
-    <schema:City rdf:resource="http://example.org/city/Brasov"/>
-    <schema:jobTitle rdf:resource="http://example.org/jobTitle/Singer"/>
-    <schema:language rdf:resource="http://example.org/language/Romanian"/>
-    <schema:knows rdf:resource="http://example.org/person/Friend1"/>
-    <schema:knows rdf:resource="http://example.org/person/Friend2"/>
-    <schema:knows rdf:resource="http://example.org/person/Friend3"/>
-    <foaf:interest rdf:resource="http://example.org/interest/No,Thing,Much"/>
-    <schema:skills rdf:resource="http://example.org/skill/More"/>
-    <schema:skills rdf:resource="http://example.org/skill/Than"/>
-    <schema:skills rdf:resource="http://example.org/skill/That"/>
-    <schema:artist rdf:resource="http://example.org/artist/Best,Artists"/>
-    <schema:artist rdf:resource="http://example.org/artist/Ever"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/Sergiu3">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>Sergiu3</foaf:name>
     <foaf:age>23</foaf:age>
     <foaf:gender>ewqeqre</foaf:gender>
     <schema:Country rdf:resource="http://example.org/country/dafdsf"/>
@@ -201,137 +136,152 @@
     <schema:artist rdf:resource="http://example.org/artist/Best,Artists"/>
     <schema:artist rdf:resource="http://example.org/artist/Ever"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/Friend1">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>Friend1</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/interest/fsd">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
-    <foaf:name>fsd</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/skill/That">
-    <rdf:type rdf:resource="https://schema.org/skills"/>
-    <foaf:name>That</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/language/Romanian">
-    <rdf:type rdf:resource="https://schema.org/language"/>
-    <foaf:name>Romanian</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/language/lilg">
-    <rdf:type rdf:resource="https://schema.org/language"/>
-    <foaf:name>lilg</foaf:name>
-  </rdf:Description>
   <rdf:Description rdf:about="http://example.org/interest/No,Thing,Much">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
     <foaf:name>No,Thing,Much</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Sergiu">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>Sergiu</foaf:name>
+    <foaf:age>23</foaf:age>
+    <foaf:gender>ewqeqre</foaf:gender>
+    <schema:Country rdf:resource="http://example.org/country/dafdsf"/>
+    <schema:City rdf:resource="http://example.org/city/j"/>
+    <schema:jobTitle rdf:resource="http://example.org/jobTitle/lkh"/>
+    <schema:language rdf:resource="http://example.org/language/lilg"/>
+    <schema:knows rdf:resource="http://example.org/person/hg"/>
+    <schema:knows rdf:resource="http://example.org/person/gh"/>
+    <schema:knows rdf:resource="http://example.org/person/gf_"/>
+    <schema:knows rdf:resource="http://example.org/person/g_h"/>
+    <schema:knows rdf:resource="http://example.org/person/gfh_"/>
+    <schema:knows rdf:resource="http://example.org/person/fg"/>
+    <schema:knows rdf:resource="http://example.org/person/h_fg"/>
+    <schema:knows rdf:resource="http://example.org/person/hfghfghfg_hfg_hgf"/>
+    <schema:knows rdf:resource="http://example.org/person/"/>
+    <schema:knows rdf:resource="http://example.org/person/hfg"/>
+    <schema:knows rdf:resource="http://example.org/person/h_fgh_fgh"/>
+    <foaf:interest rdf:resource="http://example.org/interest/hkj"/>
+    <foaf:interest rdf:resource="http://example.org/interest/sdf_sd_f,sd_fsd"/>
+    <foaf:interest rdf:resource="http://example.org/interest/fsd"/>
+    <schema:skills rdf:resource="http://example.org/skill/dsf"/>
+    <schema:skills rdf:resource="http://example.org/skill/sd__"/>
+    <schema:skills rdf:resource="http://example.org/skill/ghdh_g"/>
+    <schema:skills rdf:resource="http://example.org/skill/df"/>
+    <schema:artist rdf:resource="http://example.org/artist/sdf,hh,d"/>
+    <schema:artist rdf:resource="http://example.org/artist/"/>
+    <schema:artist rdf:resource="http://example.org/artist/dffdhf"/>
+    <schema:artist rdf:resource="http://example.org/artist/fdg"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/person/h_fg">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <foaf:name>h fg</foaf:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/artist/">
-    <rdf:type rdf:resource="https://schema.org/artist"/>
-    <foaf:name></foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/artist/sdf,hh,d">
-    <rdf:type rdf:resource="https://schema.org/artist"/>
-    <foaf:name>sdf,hh,d</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/interest/sdf_sd_f,sd_fsd">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
-    <foaf:name>sdf sd f,sd fsd</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/Friend2">
+  <rdf:Description rdf:about="http://example.org/person/Maria_Dragomiroiu">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>Friend2</foaf:name>
+    <foaf:name>Maria Dragomiroiu</foaf:name>
+    <foaf:age>48</foaf:age>
+    <foaf:gender>Female</foaf:gender>
+    <schema:Country rdf:resource="http://example.org/country/Romania"/>
+    <schema:City rdf:resource="http://example.org/city/Brasov"/>
+    <schema:jobTitle rdf:resource="http://example.org/jobTitle/Singer"/>
+    <schema:language rdf:resource="http://example.org/language/Romanian"/>
+    <schema:knows rdf:resource="http://example.org/person/Friend1"/>
+    <schema:knows rdf:resource="http://example.org/person/Friend2"/>
+    <schema:knows rdf:resource="http://example.org/person/Friend3"/>
+    <foaf:interest rdf:resource="http://example.org/interest/No,Thing,Much"/>
+    <schema:skills rdf:resource="http://example.org/skill/More"/>
+    <schema:skills rdf:resource="http://example.org/skill/Than"/>
+    <schema:skills rdf:resource="http://example.org/skill/That"/>
+    <schema:artist rdf:resource="http://example.org/artist/Best,Artists"/>
+    <schema:artist rdf:resource="http://example.org/artist/Ever"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/artist/Ever">
-    <rdf:type rdf:resource="https://schema.org/artist"/>
-    <foaf:name>Ever</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/gh">
+  <rdf:Description rdf:about="http://example.org/person/Sergiu4">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>gh</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/fg">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>fg</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/country/Romania">
-    <rdf:type rdf:resource="https://schema.org/Country"/>
-    <foaf:name>Romania</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/artist/fdg">
-    <rdf:type rdf:resource="https://schema.org/artist"/>
-    <foaf:name>fdg</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/hfg">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>hfg</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/artist/Best,Artists">
-    <rdf:type rdf:resource="https://schema.org/artist"/>
-    <foaf:name>Best,Artists</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/jobTitle/lkh">
-    <rdf:type rdf:resource="https://schema.org/jobTitle"/>
-    <foaf:name>lkh</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/Friend3">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>Friend3</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/hfghfghfg_hfg_hgf">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>hfghfghfg hfg hgf</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/interest/hkj">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
-    <foaf:name>hkj</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/">
-    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name></foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/artist/dffdhf">
-    <rdf:type rdf:resource="https://schema.org/artist"/>
-    <foaf:name>dffdhf</foaf:name>
+    <foaf:name>Sergiu4</foaf:name>
+    <foaf:age>23</foaf:age>
+    <foaf:gender>ewqeqre</foaf:gender>
+    <schema:Country rdf:resource="http://example.org/country/dafdsf"/>
+    <schema:City rdf:resource="http://example.org/city/j"/>
+    <schema:jobTitle rdf:resource="http://example.org/jobTitle/lkh"/>
+    <schema:language rdf:resource="http://example.org/language/lilg"/>
+    <schema:knows rdf:resource="http://example.org/person/hg"/>
+    <schema:knows rdf:resource="http://example.org/person/gh"/>
+    <schema:knows rdf:resource="http://example.org/person/gf_"/>
+    <schema:knows rdf:resource="http://example.org/person/g_h"/>
+    <schema:knows rdf:resource="http://example.org/person/gfh_"/>
+    <schema:knows rdf:resource="http://example.org/person/fg"/>
+    <schema:knows rdf:resource="http://example.org/person/h_fg"/>
+    <schema:knows rdf:resource="http://example.org/person/hfghfghfg_hfg_hgf"/>
+    <schema:knows rdf:resource="http://example.org/person/"/>
+    <schema:knows rdf:resource="http://example.org/person/hfg"/>
+    <schema:knows rdf:resource="http://example.org/person/h_fgh_fgh"/>
+    <foaf:interest rdf:resource="http://example.org/interest/hkj"/>
+    <foaf:interest rdf:resource="http://example.org/interest/sdf_sd_f,sd_fsd"/>
+    <foaf:interest rdf:resource="http://example.org/interest/fsd"/>
+    <schema:skills rdf:resource="http://example.org/skill/dsf"/>
+    <schema:skills rdf:resource="http://example.org/skill/sd__"/>
+    <schema:skills rdf:resource="http://example.org/skill/ghdh_g"/>
+    <schema:skills rdf:resource="http://example.org/skill/df"/>
+    <schema:artist rdf:resource="http://example.org/artist/sdf,hh,d"/>
+    <schema:artist rdf:resource="http://example.org/artist/"/>
+    <schema:artist rdf:resource="http://example.org/artist/dffdhf"/>
+    <schema:artist rdf:resource="http://example.org/artist/fdg"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/person/hg">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <foaf:name>hg</foaf:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/skill/Than">
-    <rdf:type rdf:resource="https://schema.org/skills"/>
-    <foaf:name>Than</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/g_h">
+  <rdf:Description rdf:about="http://example.org/person/h_fgh_fgh">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>g h</foaf:name>
+    <foaf:name>h fgh fgh</foaf:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/person/gfh_">
+  <rdf:Description rdf:about="http://example.org/person/Friend3">
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <foaf:name>gfh </foaf:name>
+    <foaf:name>Friend3</foaf:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/skill/ghdh_g">
+  <rdf:Description rdf:about="http://example.org/skill/asdasd">
     <rdf:type rdf:resource="https://schema.org/skills"/>
-    <foaf:name>ghdh g</foaf:name>
+    <foaf:name>asdasd</foaf:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/skill/More">
-    <rdf:type rdf:resource="https://schema.org/skills"/>
-    <foaf:name>More</foaf:name>
+  <rdf:Description rdf:about="http://example.org/person/gf_">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>gf </foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/jobTitle/asdas">
+    <rdf:type rdf:resource="https://schema.org/jobTitle"/>
+    <foaf:name>asdas</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/city/Galati">
+    <rdf:type rdf:resource="https://schema.org/City"/>
+    <foaf:name>Galati</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/artist/Ever">
+    <rdf:type rdf:resource="https://schema.org/artist"/>
+    <foaf:name>Ever</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/country/Romania">
+    <rdf:type rdf:resource="https://schema.org/Country"/>
+    <foaf:name>Romania</foaf:name>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/country/dafdsf">
     <rdf:type rdf:resource="https://schema.org/Country"/>
     <foaf:name>dafdsf</foaf:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/city/Brasov">
-    <rdf:type rdf:resource="https://schema.org/City"/>
-    <foaf:name>Brasov</foaf:name>
+  <rdf:Description rdf:about="http://example.org/skill/ghdh_g">
+    <rdf:type rdf:resource="https://schema.org/skills"/>
+    <foaf:name>ghdh g</foaf:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/jobTitle/Singer">
+  <rdf:Description rdf:about="http://example.org/artist/Best,Artists">
+    <rdf:type rdf:resource="https://schema.org/artist"/>
+    <foaf:name>Best,Artists</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest/Nirvana">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
+    <foaf:name>Nirvana</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/jobTitle/lkh">
     <rdf:type rdf:resource="https://schema.org/jobTitle"/>
-    <foaf:name>Singer</foaf:name>
+    <foaf:name>lkh</foaf:name>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/city/j">
     <rdf:type rdf:resource="https://schema.org/City"/>
@@ -341,8 +291,112 @@
     <rdf:type rdf:resource="https://schema.org/skills"/>
     <foaf:name>df</foaf:name>
   </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/hfghfghfg_hfg_hgf">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>hfghfghfg hfg hgf</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/artist/Elton_Jhon">
+    <rdf:type rdf:resource="https://schema.org/artist"/>
+    <foaf:name>Elton Jhon</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/language/English">
+    <rdf:type rdf:resource="https://schema.org/language"/>
+    <foaf:name>English</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/artist/dffdhf">
+    <rdf:type rdf:resource="https://schema.org/artist"/>
+    <foaf:name>dffdhf</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest/fsd">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
+    <foaf:name>fsd</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/g_h">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>g h</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest/sdf_sd_f,sd_fsd">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
+    <foaf:name>sdf sd f,sd fsd</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/artist/fdg">
+    <rdf:type rdf:resource="https://schema.org/artist"/>
+    <foaf:name>fdg</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/fg">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>fg</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/skill/More">
+    <rdf:type rdf:resource="https://schema.org/skills"/>
+    <foaf:name>More</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/gfh_">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>gfh </foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/artist/">
+    <rdf:type rdf:resource="https://schema.org/artist"/>
+    <foaf:name></foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/jobTitle/Singer">
+    <rdf:type rdf:resource="https://schema.org/jobTitle"/>
+    <foaf:name>Singer</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest/hkj">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
+    <foaf:name>hkj</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/skill/dsf">
+    <rdf:type rdf:resource="https://schema.org/skills"/>
+    <foaf:name>dsf</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Friend1">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>Friend1</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/Friend2">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>Friend2</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/gh">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>gh</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/language/Romanian">
+    <rdf:type rdf:resource="https://schema.org/language"/>
+    <foaf:name>Romanian</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/city/Brasov">
+    <rdf:type rdf:resource="https://schema.org/City"/>
+    <foaf:name>Brasov</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name></foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/skill/That">
+    <rdf:type rdf:resource="https://schema.org/skills"/>
+    <foaf:name>That</foaf:name>
+  </rdf:Description>
   <rdf:Description rdf:about="http://example.org/skill/sd__">
     <rdf:type rdf:resource="https://schema.org/skills"/>
     <foaf:name>sd  </foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/skill/Than">
+    <rdf:type rdf:resource="https://schema.org/skills"/>
+    <foaf:name>Than</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person/asdasd">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <foaf:name>asdasd</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/artist/sdf,hh,d">
+    <rdf:type rdf:resource="https://schema.org/artist"/>
+    <foaf:name>sdf,hh,d</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest/Video_Games">
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/>
+    <foaf:name>Video Games</foaf:name>
   </rdf:Description>
 </rdf:RDF>

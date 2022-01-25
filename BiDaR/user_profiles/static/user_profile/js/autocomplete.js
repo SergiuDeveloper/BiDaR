@@ -1,3 +1,5 @@
+const URL = 'http://localhost:8080'
+
 // the autocomplete function takes two arguments, the text field element and an array of possible autocompleted values
 function autocomplete(inp, arr) {
     // a function to classify an item as "active"
@@ -47,10 +49,11 @@ function autocomplete(inp, arr) {
         // create a DIV element for each matching element
         element_div = document.createElement("DIV");
         element_div.innerHTML = arr[i]["label"]["value"];
-        element_div.innerHTML += "<input type='hidden' value='" + arr[i]["label"]["value"] + "'>";  // insert a input field that will hold the current array item's value
+        element_div.innerHTML += "<input type='hidden' name='" + arr[i]["ref"]["value"] +"' value='" + arr[i]["label"]["value"] + "'>";  // insert a input field that will hold the current array item's value
         // execute a function when someone clicks on the item value (DIV element)
         element_div.addEventListener("click", function (e) {
             inp.value = this.getElementsByTagName("input")[0].value;  // insert the value for the autocomplete text field
+            inp.name = this.getElementsByTagName("input")[0].name;
             closeAllLists();  // close the list of autocompleted values, (or any other open lists of autocompleted values
         });
         suggestion_div.appendChild(element_div);
@@ -93,15 +96,24 @@ function fetch_autocomplete_user_suggestions(event){
         input = input.replace(/ /gi, "_");
         let query_params = new URLSearchParams()
         query_params.set('search_text', input)
-        const api_url = `${window.location.origin}/profile/preference_suggestions/?${query_params}`
-        fetch(api_url)
-            .then(r => r.json())
-            .then(t => autocomplete(target_element, t))
-            .catch(e => console.log(e));
+        const api_url = `${URL}/autocomplete_suggestions`;
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                var responseText = xmlHttp.responseText;
+                var json_response = JSON.parse(responseText)
+                autocomplete(target_element, json_response);
+            }
+        }
+        xmlHttp.open('POST', api_url, true);
+        xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+        xmlHttp.send(JSON.stringify({
+            'input_text': input
+        }));
     }
 };
 
-function debounce(func, wait = 150, early = false) {
+function debounce(func, wait = 250, early = false) {
     let timeout;
     return function (...args) {
         const context = this;
@@ -116,7 +128,46 @@ function debounce(func, wait = 150, early = false) {
     };
 }
 
-const element = document.querySelector('.suggestions');
-element.addEventListener("input", debounce(function(e) {
+function update_interests(label, ref){
+    const list = document.getElementById("interest_list");
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    a.href = ref;
+    a.innerHTML = label;
+    li.appendChild(a);
+    list.appendChild(li);
+    queryAllFactsOnClick("network");
+}
+
+function add_interest(event){
+    const input = document.getElementById('interest_input');
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            var responseText = xmlHttp.responseText;
+            var responceJSON = JSON.parse(responseText)
+            const label = input.value; 
+            update_interests(responceJSON["label"], responceJSON["ref"])
+            // console.log(responceJSON["label"]);
+        }
+    }
+    // const input = document.getElementById('interest_input');
+    const interest_ref = input.name;
+    xmlHttp.open('POST', `${URL}/add_interest`, true);
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.send(JSON.stringify({
+        'name': "Andrei Ghiran",
+        'interest': interest_ref
+    }));
+
+}
+console.log( document.querySelector('.suggestions'));
+const element1 = document.querySelector('.suggestions');
+element1.addEventListener("input", debounce(function(e) {
     fetch_autocomplete_user_suggestions(e);
+}));
+
+const element2 = document.querySelector('.addInterests');
+element2.addEventListener("click", debounce(function(e) {
+    add_interest(e);
 }));

@@ -71,3 +71,15 @@ class SparqlProcessor:
         triples = [(results[i]['s']['value'], results[i]['p']['value'], results[i]['o']['value']) for i in range(len(results)) if languages[i] == language]
 
         return entity, triples, processed_triples
+
+    def get_autocomplete_suggestions(self, text):
+        # TODO make query base on the text and return results
+        query = 'SELECT ?ref ?label WHERE { ?ref rdfs:label ?label FILTER ( regex(?label , "^' + text.replace("_"," ") + '", "i") && langMatches(lang(?label ),"en") ). } ORDER BY ?label LIMIT 5'
+        # SELECT ?ref ?label WHERE { ?ref rdfs:label ?label FILTER ( regex(?label , "^Romani", "i") && langMatches(lang(?label ),"en") ). } ORDER BY strlen(str(?label)) LIMIT 5
+        self.__sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+
+        self.__sparql.setQuery(query)
+
+        self.__sparql.setReturnFormat(JSON)
+        results = self.__sparql.query().convert()["results"]["bindings"]
+        return results

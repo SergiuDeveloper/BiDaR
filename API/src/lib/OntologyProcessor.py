@@ -41,6 +41,23 @@ class OntologyProcessor:
 
         self.__backup_daemon_running = False
     
+    def add_interest_to_user(self, user, interest_ref):
+        self.__graph_lock.acquire()
+        person = URIRef("http://example.org/person/"+ user.replace(" ","_"))
+        interest_ref = URIRef(interest_ref)
+        # q = """
+        #         INSERT DATA {  %s %s %s
+        #            """ % (person, FOAF.interest, interest_ref)
+        # self.__graph.update(q)
+        # self.__graph.add((person, FOAF.interest, interest_ref))
+        # self.__graph.add((interest_ref, RDF.type, FOAF.interest))
+        # self.__graph.add((interest_ref, FOAF.name, Literal("Queen_(band)")))
+        self.__graph.add((person, FOAF.interest, interest_ref))
+
+        self.__graph_lock.release()
+
+        return {"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref}
+
     def activate_backup_daemon(self, timeout):
         self.__backup_daemon_running = True
 
@@ -70,19 +87,22 @@ class OntologyProcessor:
         return list(set(results))
 
     def query_all_data(self, name):
+        self.__graph_lock.acquire()
+
         person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
         results1 = list(self.__graph.triples((person, None, None)))
         results2 = list(self.__graph.triples((None, None, person)))
-
         results1 = [(
             re.split('/|#', result[0].n3())[-1][:-1].replace('_', ' '),
             re.split('/|#', result[1].n3())[-1][:-1].replace('_', ' '),
-            re.split('/|#', result[2].n3())[-1][:-1].replace('_', ' ')
+            re.split('/|#', result[2].n3())[-1][:-1].replace('_', ' '),
+            str(result[2])
         ) for result in results1]
         results2 = [(
             re.split('/|#', result[0].n3())[-1][:-1].replace('_', ' '),
             re.split('/|#', result[1].n3())[-1][:-1].replace('_', ' '),
-            re.split('/|#', result[2].n3())[-1][:-1].replace('_', ' ')
+            re.split('/|#', result[2].n3())[-1][:-1].replace('_', ' '),
+            str(result[2])
         ) for result in results2]
 
         results1.extend(results2)
@@ -90,8 +110,10 @@ class OntologyProcessor:
         results1 = [(
             result[0][1:] if len(result[0][1:]) == 0 else result[0][1:] if result[0][0] == '\"' else result[0],
             result[1][1:] if len(result[1][1:]) == 0 else result[1][1:] if result[1][0] == '\"' else result[1],
-            result[2][1:] if len(result[2][1:]) == 0 else result[2][1:] if result[2][0] == '\"' else result[2]
+            result[2][1:] if len(result[2][1:]) == 0 else result[2][1:] if result[2][0] == '\"' else result[2],
+            result[3]
         ) for result in results1]
+        self.__graph_lock.release()
 
         return list(set(results1))
 

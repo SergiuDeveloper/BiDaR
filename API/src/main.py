@@ -74,6 +74,21 @@ def exceptions_hook(exc_type, exc_value, exc_traceback, ontology_processor):
 
     traceback.print_exception(exc_type, exc_value, exc_traceback)
 
+@app.post('/add_interest')
+def add_interest():
+    user_name = request.get_json(force=True)["name"]
+    interest = request.get_json(force=True)["interest"]
+    result = ontology_processor.add_interest_to_user(user_name,interest)
+    return jsonify(result)
+
+@app.post("/autocomplete_suggestions")
+def autocomplete_sugestions():
+    input_text = request.get_json(force=True)["input_text"]
+
+    sparql_processor = SparqlProcessor()
+
+    result = sparql_processor.get_autocomplete_suggestions(text = input_text)
+    return jsonify(result)
 
 if __name__ == '__main__':
     ontology_processor = OntologyProcessor(ONTOLOGY_FILE_PATH, ONTOLOGY_FORMAT)
