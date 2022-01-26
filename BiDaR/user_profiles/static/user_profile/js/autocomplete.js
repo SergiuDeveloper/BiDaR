@@ -88,12 +88,11 @@ function autocomplete(inp, arr) {
     });
 };
 
-function fetch_autocomplete_user_suggestions(event){
-    console.log("call");
+function fetch_autocomplete_suggestions(event){
     const target_element = event.target;
+    const type = event.target.id.split("_")[0];
     let input = target_element.value;
     if (input.trim() != '') {
-        input = input.replace(/ /gi, "_");
         let query_params = new URLSearchParams()
         query_params.set('search_text', input)
         const api_url = `${URL}/autocomplete_suggestions`;
@@ -108,12 +107,13 @@ function fetch_autocomplete_user_suggestions(event){
         xmlHttp.open('POST', api_url, true);
         xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
         xmlHttp.send(JSON.stringify({
-            'input_text': input
+            'input_text': input,
+            "type": type
         }));
     }
 };
 
-function debounce(func, wait = 250, early = false) {
+function debounce(func, wait = 350, early = false) {
     let timeout;
     return function (...args) {
         const context = this;
@@ -128,46 +128,89 @@ function debounce(func, wait = 250, early = false) {
     };
 }
 
-function update_interests(label, ref){
-    const list = document.getElementById("interest_list");
+function update_list(label, ref, section){
+    const list = document.getElementById(`${section}_list`);
     var li = document.createElement("li");
     var a = document.createElement("a");
+    var x = document.createElement("a");
     a.href = ref;
     a.innerHTML = label;
+    x.innerHTML = "X"
+    x.classList = "remove_data text-danger text-decoration-none"
+    x.href = ""
     li.appendChild(a);
+    li.appendChild(x);
     list.appendChild(li);
     queryAllFactsOnClick("network");
 }
 
 function add_interest(event){
-    const input = document.getElementById('interest_input');
+    const section = event.target.id.split("_")[1];
+    const input = document.getElementById(section+'_input');
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var responseText = xmlHttp.responseText;
             var responceJSON = JSON.parse(responseText)
-            const label = input.value; 
-            update_interests(responceJSON["label"], responceJSON["ref"])
-            // console.log(responceJSON["label"]);
+            update_list(responceJSON["label"], responceJSON["ref"], section)
+            input.value = "";
         }
     }
-    // const input = document.getElementById('interest_input');
     const interest_ref = input.name;
-    xmlHttp.open('POST', `${URL}/add_interest`, true);
+    xmlHttp.open('POST', `${URL}/add_data`, true);
     xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xmlHttp.send(JSON.stringify({
         'name': "Andrei Ghiran",
-        'interest': interest_ref
+        'data': interest_ref,
+        "section": section
     }));
 
 }
-console.log( document.querySelector('.suggestions'));
-const element1 = document.querySelector('.suggestions');
-element1.addEventListener("input", debounce(function(e) {
-    fetch_autocomplete_user_suggestions(e);
-}));
 
-const element2 = document.querySelector('.addInterests');
-element2.addEventListener("click", debounce(function(e) {
-    add_interest(e);
-}));
+function remove_data(event){
+    const section = event.target.parentNode.parentNode.id.split("_")[0];
+    const name = "Andrei Ghiran"
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            var responseText = xmlHttp.responseText;
+            var responceJSON = JSON.parse(responseText)
+        }
+    }
+    const data_ref = event.target.previousElementSibling.href;
+    xmlHttp.open('POST', `${URL}/remove_data`, true);
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.send(JSON.stringify({
+        'name': "Andrei Ghiran",
+        'data': data_ref,
+        "section": section
+    }));
+}
+
+
+const suggestion_elements = document.getElementsByClassName("suggestions");
+
+for (var i = 0; i<suggestion_elements.length; i++){
+    var element = suggestion_elements[i];
+    element.addEventListener("input", debounce(function(e) {
+        fetch_autocomplete_suggestions(e);
+    }));    
+}
+
+const add_element = document.getElementsByClassName('add_to_list');
+
+
+for (var i = 0; i<add_element.length; i++){
+    var element = add_element[i];
+    element.addEventListener("click", debounce(function(e) {
+        add_interest(e);
+    })); 
+}
+
+const remove_element = document.getElementsByClassName('remove_data');
+for (var i = 0; i<remove_element.length; i++){
+    var element = remove_element[i];
+    element.addEventListener("click", debounce(function(e) {
+        remove_data(e);
+    })); 
+}

@@ -74,20 +74,29 @@ def exceptions_hook(exc_type, exc_value, exc_traceback, ontology_processor):
 
     traceback.print_exception(exc_type, exc_value, exc_traceback)
 
-@app.post('/add_interest')
-def add_interest():
+@app.post('/add_data')
+def add_data():
     user_name = request.get_json(force=True)["name"]
-    interest = request.get_json(force=True)["interest"]
-    result = ontology_processor.add_interest_to_user(user_name,interest)
+    data = request.get_json(force=True)["data"]
+    section = request.get_json(force=True)["section"]
+    result = ontology_processor.add_data_to_user(user_name,data,section)
+    return jsonify(result)
+
+@app.post('/remove_data')
+def remove_data():
+    user_name = request.get_json(force=True)["name"]
+    data = request.get_json(force=True)["data"]
+    section = request.get_json(force=True)["section"]
+    result = ontology_processor.remove_data_from_user(user_name,data,section)
     return jsonify(result)
 
 @app.post("/autocomplete_suggestions")
-def autocomplete_sugestions():
+def get_autocomplete_suggestions():
     input_text = request.get_json(force=True)["input_text"]
-
+    type = request.get_json(force=True)["type"]
     sparql_processor = SparqlProcessor()
 
-    result = sparql_processor.get_autocomplete_suggestions(text = input_text)
+    result = sparql_processor.get_autocomplete_suggestions(input_text, type)
     return jsonify(result)
 
 if __name__ == '__main__':

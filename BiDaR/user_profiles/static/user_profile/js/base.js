@@ -2,7 +2,6 @@
 
 function queryAllFactsOnClick(networkElementId) {
     var nameInput = document.getElementById('name').innerHTML;
-    console.log(nameInput)
     if (nameInput.length == 0) {
         return;
     }
@@ -12,7 +11,6 @@ function queryAllFactsOnClick(networkElementId) {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var responseText = xmlHttp.responseText;
             var triples = JSON.parse(responseText)
-            console.log(triples)
             populateGraph(networkElementId, triples)
         }
     }

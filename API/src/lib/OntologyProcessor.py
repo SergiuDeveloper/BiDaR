@@ -41,23 +41,6 @@ class OntologyProcessor:
 
         self.__backup_daemon_running = False
     
-    def add_interest_to_user(self, user, interest_ref):
-        self.__graph_lock.acquire()
-        person = URIRef("http://example.org/person/"+ user.replace(" ","_"))
-        interest_ref = URIRef(interest_ref)
-        # q = """
-        #         INSERT DATA {  %s %s %s
-        #            """ % (person, FOAF.interest, interest_ref)
-        # self.__graph.update(q)
-        # self.__graph.add((person, FOAF.interest, interest_ref))
-        # self.__graph.add((interest_ref, RDF.type, FOAF.interest))
-        # self.__graph.add((interest_ref, FOAF.name, Literal("Queen_(band)")))
-        self.__graph.add((person, FOAF.interest, interest_ref))
-
-        self.__graph_lock.release()
-
-        return {"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref}
-
     def activate_backup_daemon(self, timeout):
         self.__backup_daemon_running = True
 
@@ -88,7 +71,6 @@ class OntologyProcessor:
 
     def query_all_data(self, name):
         self.__graph_lock.acquire()
-
         person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
         results1 = list(self.__graph.triples((person, None, None)))
         results2 = list(self.__graph.triples((None, None, person)))
@@ -180,6 +162,65 @@ class OntologyProcessor:
             self.__graph.add((person, SDO.artist, favorite_artist))
 
         self.__graph_lock.release()
+
+    def add_data_to_user(self, user, interest_ref, section):
+        self.__graph_lock.acquire()
+        person = URIRef("http://example.org/person/"+ user.replace(" ","_"))
+        interest_ref = URIRef(interest_ref)
+        # q = """
+        #         INSERT DATA {  %s %s %s
+        #            """ % (person, FOAF.interest, interest_ref)
+        # self.__graph.update(q)
+        # self.__graph.add((person, FOAF.interest, interest_ref))
+        # self.__graph.add((interest_ref, RDF.type, FOAF.interest))
+        # self.__graph.add((interest_ref, FOAF.name, Literal("Queen_(band)")))
+        if section == "Interests":
+            rel = FOAF.interest
+        elif section == "Skills":
+            rel = SDO.skills
+        elif section == "Knows":
+            rel = FOAF.knows
+        elif section == "Favourite Artists":
+            rel = SDO.artist
+        else:
+            return None
+
+        self.__graph.add((person, rel, interest_ref))
+
+        self.__graph_lock.release()
+
+        return {"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref}
+
+    def remove_data_from_user(self, user, data_ref, section):
+        self.__graph_lock.acquire()
+        person = URIRef("http://example.org/person/"+ user.replace(" ","_"))
+        interest_ref = URIRef(data_ref)
+        # q = """
+        #         INSERT DATA {  %s %s %s
+        #            """ % (person, FOAF.interest, interest_ref)
+        # self.__graph.update(q)
+        # self.__graph.add((person, FOAF.interest, interest_ref))
+        # self.__graph.add((interest_ref, RDF.type, FOAF.interest))
+        # self.__graph.add((interest_ref, FOAF.name, Literal("Queen_(band)")))
+        if section == "Interests":
+            rel = FOAF.interest
+        elif section == "Skills":
+            rel = SDO.skills
+        elif section == "Knows":
+            rel = SDO.knows
+        elif section == "Favourite Artists":
+            rel = SDO.artist
+        else:
+            return False
+
+        try:
+            self.__graph.remove((person, rel, interest_ref))
+        except:
+            return False
+
+        self.__graph_lock.release()
+
+        return True
 
     def __backup_daemon_logic(self, timeout):
         last_execution_time = time()

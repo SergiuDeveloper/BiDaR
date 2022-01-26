@@ -2,13 +2,9 @@
     width: 72.5vw;
     height: 93vh;
     border: 1px solid lightgray;
-    float: left;
-    margin-left: 1cm;
-    margin-top: 0.3cm;
-}
-
-#forms {
-    float: left;
+    /* float: left; */
+    /* margin-left: 1cm; */
+    /* margin-top: 0.3cm; */
 }
 
 .inputForm {

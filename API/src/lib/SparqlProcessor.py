@@ -72,10 +72,11 @@ class SparqlProcessor:
 
         return entity, triples, processed_triples
 
-    def get_autocomplete_suggestions(self, text):
-        # TODO make query base on the text and return results
-        query = 'SELECT ?ref ?label WHERE { ?ref rdfs:label ?label FILTER ( regex(?label , "^' + text.replace("_"," ") + '", "i") && langMatches(lang(?label ),"en") ). } ORDER BY ?label LIMIT 5'
-        # SELECT ?ref ?label WHERE { ?ref rdfs:label ?label FILTER ( regex(?label , "^Romani", "i") && langMatches(lang(?label ),"en") ). } ORDER BY strlen(str(?label)) LIMIT 5
+    def get_autocomplete_suggestions(self, text, type):
+        additional_querie = ""
+        if type == "Favourite Artists":
+            additional_querie = ". [] dbp:artist ?ref"
+        query = 'SELECT DISTINCT ?ref ?label WHERE { ?ref rdfs:label ?label'+ additional_querie +'. FILTER ( regex(?label , "^' + text.replace("_"," ") + '", "i") && langMatches(lang(?label ),"en") ). } ORDER BY ?label LIMIT 10'
         self.__sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 
         self.__sparql.setQuery(query)
@@ -83,3 +84,22 @@ class SparqlProcessor:
         self.__sparql.setReturnFormat(JSON)
         results = self.__sparql.query().convert()["results"]["bindings"]
         return results
+
+    def get_ceva(self, text, type):
+        # used for testing during develpment
+        additional_querie = ""
+        
+        query = 'SELECT DISTINCT ?artistlabel ?rellabel ?label ?release WHERE { ?album rdf:type dbo:Album ; dbp:artist dbr:Eminem ; dbp:released ?release ; rdfs:label ?label . dbr:Eminem rdfs:label ?artistlabel . dbo:Album rdfs:label ?rellabel . BIND (IF((datatype(?release) = <http://www.w3.org/2001/XMLSchema#date>), YEAR(?release), ?release) AS ?releaseyear). FILTER (?releaseyear = 2000 && langMatches(lang(?label ),"en") && langMatches(lang(?artistlabel),"en") && langMatches(lang(?rellabel),"en") ) }'
+        # SELECT DISTINCT ?ref ?label WHERE { ?ref rdfs:label ?label. [] dbp:artist ?ref . FILTER ( regex(?label , "^em", "i") && langMatches(lang(?label ),"en") ). } ORDER BY ?label LIMIT 10
+        self.__sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+
+        self.__sparql.setQuery(query)
+
+        self.__sparql.setReturnFormat(JSON)
+        final_res = []
+        results = self.__sparql.query().convert()["results"]["bindings"]
+        for result in results:
+            final_res.append((result['artistlabel']['value'], result['rellabel']['value'], result['label']['value']))
+            final_res.append((result['label']['value'], "released", result['release']['value']))
+
+        return final_res

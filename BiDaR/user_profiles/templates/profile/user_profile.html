@@ -45,12 +45,12 @@
                 {% for cat in categories %}
                     <h3>{{ cat.name }}</h3>
                     <ul>
-                        <div id="interest_list">
+                        <div id="{{cat.name}}_list">
                         {% for val in cat.values %}
-                            <li> <a href= "{{val.1}}">{{val.0}}</a> <a>X</a> </li>
+                            <li> <a href= "{{val.1}}">{{val.0}}</a> <a href="" class="remove_data text-danger text-decoration-none">X</a></li>
                         {% endfor %}
                         </div>
-                        <li><input type="text" class="suggestions" id="interest_input" name=""><button class='add{{cat.name}}'>Add {{ cat.name }}</button></li>
+                        <li><input type="text" class="suggestions" id="{{cat.name}}_input" name=""><button id='add_{{cat.name}}' class="add_to_list">Add {{ cat.name }}</button></li>
                     </ul>
                 {% endfor %}
                 <!-- </div> -->

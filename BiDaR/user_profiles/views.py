@@ -62,7 +62,10 @@ def ProfiletView(request, user_id):
             context["language"] = item[2]
 
         
-
+    interests.sort()
+    skills.sort()
+    knows.sort()
+    artists.sort()
     # query = """            
     #     SELECT DISTINCT ?genre ?lable
     #     {
@@ -88,6 +91,8 @@ def ProfiletView(request, user_id):
     
     return render(request, 'profile/user_profile.html', context)
 
+def RegisterUserView(request):
+    return render(request, 'profile/register_user.html', {})
 
 def searchPreference(request):
     print("searchPreference call")
