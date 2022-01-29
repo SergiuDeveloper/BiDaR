@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BiDaR Technical Report</title>
+    <link rel="stylesheet" href="css/scholarly.css">
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/refs.js"></script>
+    <script src="js/scholarly.js"></script>
+</head>
+
+<body prefix="schema: http://schema.org">
+
+    <header>
+        <h1>BiDaR Technical Report</h1>
+    </header>
+
+    <div role="contentinfo">
+        <dl>
+            <dt>Authors</dt>
+            <dd>
+                Nistor Marian-Sergiu (MSD1)
+            </dd>
+            <dd>
+                Ghiran Andrei (MSD1)
+            </dd>
+
+            <dt>Coordinator</dt>
+            <dd>
+                Dr. Sabin-Corneliu Buraga
+            </dd>
+        </dl>
+    </div>
+
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+        <h2>Abstract</h2>
+        <p>
+            There are plenty of interesting resources provided by various knowledge Web systems like <a role="doc-biblioref">DBpedia</a>. <a role="doc-biblioref">BiDaR</a>, which stands for "big data retriever", represents a micro-service-based platform
+            able to intelligently query, visualize large sets of data and additional resources according to the user's needs and preferences. The platform takes into consideration the user's preferences and entourage. Given a set of areas of interest,
+            the platform also provides support for suggesting topics that could be of interest for the user.
+        </p>
+    </section>
+
+    <section id="data-description">
+        <h2>Data Description</h2>
+        <p>
+            The data used by BiDaR is either acquired from external sources such as <a role="doc-biblioref">DBpedia</a>, or is queried from the internal ontology. External sources are used for querying data that is supposed to be of interest for the user,
+            based on his preferences. The internal data model is used for storing relationships between the user and his areas of interest, location, age, peers, and so on.
+        </p>
+
+        <section id="internal-data-model">
+            <h3>Internal Data Model</h3>
+
+            <figure typeof="sa:image" resource="#internal-data-model" id="internal-data-model" role="doc-example">
+                <center>
+                    <img src="media/internal-data-model.png" alt="Internal Data Model" id="internal-data-model-img">
+                    <figcaption>
+                        <span property="schema:name">Figure 1.</span>
+                        <span property="schema:description">The internal data model for BiDaR
+                            </span>
+                    </figcaption>
+                </center>
+            </figure>
+            <p>
+                aasdasdas
+            </p>
+        </section>
+    </section>
+
+</body>
+
+</html>
