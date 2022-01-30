@@ -68,66 +68,66 @@
             </figure>
             <p>
                 The internal data model is represented by a <a role="doc-biblioref">RDF</a> ontology. The data model schema is the following:<br>
-                <code>
-                    <pre>
-                        &lt;?xml version="1.0" encoding="utf-8"?&gt;
-                        &lt;rdf:RDF
-                            xmlns:foaf="http://xmlns.com/foaf/0.1/"
-                            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                            xmlns:schema="https://schema.org/"
-                        &gt;
-                            &lt;rdf:Description rdf:about="PERSON_URI"&gt;
-                                &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                                &lt;foaf:age&gt;AGE&lt;/foaf:age&gt;
-                                &lt;foaf:gender&gt;GENDER&lt;/foaf:gender&gt;
-                                &lt;schema:Country rdf:resource="COUNTRY"/&gt;
-                                &lt;schema:City rdf:resource="CITY"/&gt;
-                                &lt;schema:jobTitle rdf:resource="JOB_TITLE"/&gt;
-                                &lt;schema:language rdf:resource="LANGUAGE"/&gt;
-                                &lt;schema:knows rdf:resource="KNOWN_PERSON"/&gt; (LIST)
-                                &lt;foaf:interest rdf:resource="INTEREST"/&gt; (LIST)
-                                &lt;schema:skills rdf:resource="SKILL"/&gt; (LIST)
-                                &lt;schema:artist rdf:resource="ARTIST"/&gt; (LIST)
-                            &lt;/rdf:Description&gt;
+                <figure typeof="schema:SoftwareSourceCode" role="doc-example" id="internal-ontology-schema">
+                    <pre><code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:schema="https://schema.org/"
+&gt;
+    &lt;rdf:Description rdf:about="PERSON_URI"&gt;
+        &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+        &lt;foaf:age&gt;AGE&lt;/foaf:age&gt;
+        &lt;foaf:gender&gt;GENDER&lt;/foaf:gender&gt;
+        &lt;schema:Country rdf:resource="COUNTRY"/&gt;
+        &lt;schema:City rdf:resource="CITY"/&gt;
+        &lt;schema:jobTitle rdf:resource="JOB_TITLE"/&gt;
+        &lt;schema:language rdf:resource="LANGUAGE"/&gt;
+        &lt;schema:knows rdf:resource="KNOWN_PERSON"/&gt; (LIST)
+        &lt;foaf:interest rdf:resource="INTEREST"/&gt; (LIST)
+        &lt;schema:skills rdf:resource="SKILL"/&gt; (LIST)
+        &lt;schema:artist rdf:resource="ARTIST"/&gt; (LIST)
+    &lt;/rdf:Description&gt;
 
-                            &lt;rdf:Description rdf:about="INTEREST_URI"&gt;
-                                &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                            &lt;/rdf:Description&gt;
+    &lt;rdf:Description rdf:about="INTEREST_URI"&gt;
+        &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
 
-                            &lt;rdf:Description rdf:about="SKILL_URI"&gt;
-                                &lt;rdf:type rdf:resource="https://schema.org/skills"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                            &lt;/rdf:Description&gt;
+    &lt;rdf:Description rdf:about="SKILL_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/skills"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
 
-                            &lt;rdf:Description rdf:about="ARTIST_URI"&gt;
-                                &lt;rdf:type rdf:resource="https://schema.org/artist"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                            &lt;/rdf:Description&gt;
+    &lt;rdf:Description rdf:about="ARTIST_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/artist"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
 
-                            &lt;rdf:Description rdf:about="COUNTRY_URI"&gt;
-                                &lt;rdf:type rdf:resource="https://schema.org/Country"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                            &lt;/rdf:Description&gt;
+    &lt;rdf:Description rdf:about="COUNTRY_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/Country"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
 
-                            &lt;rdf:Description rdf:about="CITY_URI"&gt;
-                                &lt;rdf:type rdf:resource="https://schema.org/City"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                            &lt;/rdf:Description&gt;
+    &lt;rdf:Description rdf:about="CITY_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/City"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
 
-                            &lt;rdf:Description rdf:about="LANGUAGE_URI"&gt;
-                                &lt;rdf:type rdf:resource="https://schema.org/Language"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                            &lt;/rdf:Description&gt;
+    &lt;rdf:Description rdf:about="LANGUAGE_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/Language"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
 
-                            &lt;rdf:Description rdf:about="JOB_URI"&gt;
-                                &lt;rdf:type rdf:resource="https://schema.org/jobTitle"/&gt;
-                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
-                            &lt;/rdf:Description&gt;
-                        &lt;/rdf:RDF&gt;
-                    </pre>
-                </code>
+    &lt;rdf:Description rdf:about="JOB_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/jobTitle"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;
+                    </pre></code>
+                </figure>
             </p>
 
             <p>
