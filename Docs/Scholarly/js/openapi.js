@@ -173,7 +173,7 @@ function populateSwaggerUI() {
                             "name": "interests",
                             "in": "header",
                             "required": true,
-                            "description": "The peron's list of interests"
+                            "description": "The person's list of interests"
                         },
                         {
                             "schema": {
@@ -182,7 +182,7 @@ function populateSwaggerUI() {
                             "name": "skills",
                             "in": "header",
                             "required": true,
-                            "description": "The peron's list of skills"
+                            "description": "The person's list of skills"
                         },
                         {
                             "schema": {
@@ -191,7 +191,7 @@ function populateSwaggerUI() {
                             "name": "favoriteArtists",
                             "in": "header",
                             "required": true,
-                            "description": "The peron's list of favorite artists"
+                            "description": "The person's list of favorite artists"
                         }
                     ],
                     "responses": {
@@ -208,6 +208,111 @@ function populateSwaggerUI() {
                     "responses": {
                         "200": {
                             "description": "List of names for all the people entries in the internal ontology"
+                        }
+                    }
+                }
+            },
+            "/add_data": {
+                "post": {
+                    "description": "Adds data related to an existing user",
+                    "parameters": [{
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "name",
+                            "in": "header",
+                            "required": true,
+                            "description": "The name of the data entity"
+                        },
+                        {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "data",
+                            "in": "header",
+                            "required": true,
+                            "description": "The value"
+                        },
+                        {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "section",
+                            "in": "header",
+                            "required": true,
+                            "description": "The section"
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Return a 200 status and the lable and external data source reference to the newly added data"
+                        }
+                    }
+                }
+            },
+            "/remove_data": {
+                "post": {
+                    "description": "Removes data related to an existing user",
+                    "parameters": [{
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "name",
+                            "in": "header",
+                            "required": true,
+                            "description": "The name of the data entity"
+                        },
+                        {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "data",
+                            "in": "header",
+                            "required": true,
+                            "description": "The value"
+                        },
+                        {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "section",
+                            "in": "header",
+                            "required": true,
+                            "description": "The section"
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Return a 200 status and True if data was deleted successfuly "
+                        }
+                    }
+                }
+            },
+            "/autocomplete_suggestions": {
+                "post": {
+                    "description": "Provides autocomplete suggestions for partially specified resource names",
+                    "parameters": [{
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "input_text",
+                            "in": "header",
+                            "required": true,
+                            "description": "The input text for which the autocomplete suggestions should be provided"
+                        },
+                        {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "name": "type",
+                            "in": "header",
+                            "required": true,
+                            "description": "The resource type"
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Return a 200 status and a list of 10 sugestions of resources from the external data source that match the provided text"
                         }
                     }
                 }
