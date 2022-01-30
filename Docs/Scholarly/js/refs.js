@@ -16,5 +16,29 @@ let refs = {
         resource="https://swagger.io/specification/">
       <cite property="schema:name"><a href="https://swagger.io/specification/">OpenAPI specification</a></cite>.
     </dd>
+    `,
+    RDF: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://www.w3.org/RDF/">
+      <cite property="schema:name"><a href="https://www.w3.org/RDF/">Resource Description Framework (RDF)</a></cite>.
+    </dd>
+    `,
+    Sparql: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://www.w3.org/TR/rdf-sparql-query/">
+      <cite property="schema:name"><a href="https://www.w3.org/TR/rdf-sparql-query/">SPARQL Query Language for RDF</a></cite>.
+    </dd>
+    `,
+    MapReduce: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://epubs.siam.org/doi/abs/10.1137/1.9781611973075.76">
+      <cite property="schema:name"><a href="https://epubs.siam.org/doi/abs/10.1137/1.9781611973075.76">A Model of Computation for MapReduce</a></cite>.
+    </dd>
+    `,
+    LinkedData: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://www.w3.org/wiki/LinkedData">
+      <cite property="schema:name"><a href="https://www.w3.org/wiki/LinkedData">LinkedData principles</a></cite>.
+    </dd>
     `
 };

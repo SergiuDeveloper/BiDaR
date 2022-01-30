@@ -56,20 +56,18 @@
         </p>
 
         <section id="internal-data-model">
-            <h3>Internal Data Model</h3>
-
+            <h3>Internal Ontology</h3>
             <figure typeof="sa:image" resource="#internal-data-model" id="internal-data-model" role="doc-example">
                 <center>
                     <img src="media/internal-data-model.png" alt="Internal Data Model" id="internal-data-model-img">
                     <figcaption>
                         <span property="schema:name">Figure 1.</span>
-                        <span property="schema:description">The internal data model for BiDaR
-                            </span>
+                        <span property="schema:description">The internal data model for BiDaR</span>
                     </figcaption>
                 </center>
             </figure>
             <p>
-                The internal data model schema is the following:<br>
+                The internal data model is represented by a <a role="doc-biblioref">RDF</a> ontology. The data model schema is the following:<br>
                 <code>
                     <pre>
                         &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -141,9 +139,56 @@
 
     <section id="api">
         <h2>API</h2>
+        <section id="open-api">
+            <h3>OpenAPI Specification</h3>
+            <p>
+                The application relies on a REST API in order to handle DBpedia queries and perform additions, updates, deletions, or queries on the internal data model. The <a role="doc-biblioref">OpenAPI</a> specification for the API is the following:
+                <div id="swagger-ui"></div>
+            </p>
+        </section>
+
+        <section id="Technical Aspects">
+            <h3>API Modules</h3>
+            <p>
+                The logic for the API revolves around the usage of 3 processors:
+                <ul>
+                    <li>The ontology processor</li>
+                    <li>The Sparql processor</li>
+                    <li>The text processor</li>
+                </ul>
+                The ontology processor represents a wrapper for the internal <a role="doc-biblioref">RDF</a> ontology, which is used to stored user data. The ontology backup daemon is a thread that runs in the background, creating disk backups for the
+                ontology (which is also stored in memory), to ensure that the data is not lost, in case of a failure.<br> The <a role="doc-biblioref">Sparql</a> processor is used in order to retrieve data from <a role="doc-biblioref">DBpedia</a>. When
+                querying information, the requests are being executed in parallel, using a <a role="doc-biblioref">MapReduce</a>-like approach.<br> The text processor is used in order to execute the NLP pipeline on input text data, performing POS tagging
+                and providing a parallel language detection mechanism.
+            </p>
+        </section>
+
+        <section id="Architecture">
+            <h3>Architecture</h3>
+            <p>
+                <figure typeof="sa:image" resource="#class-diagram" id="class-diagram" role="doc-example">
+                    <center>
+                        <img src="media/class-diagram.png" alt="Class Diagram" id="class-diagram-img">
+                        <figcaption>
+                            <span property="schema:name">Figure 2.</span>
+                            <span property="schema:description">Class diagram</span>
+                        </figcaption>
+                    </center>
+                </figure>
+            </p>
+        </section>
+    </section>
+
+    <section id="linked-data-principles">
+        <h2>Linked Data Principles</h2>
         <p>
-            The application relies on a REST API in order to handle DBpedia queries and perform additions, updates, deletions, or queries on the internal data model. The <a role="doc-biblioref">OpenAPI</a> specification for the API is the following:
-            <div id="swagger-ui"></div>
+            The solution conforms to the <a role="doc-biblioref">LinkedData</a> principles, given the fact that:
+            <ul>
+                <li>The names for the entities in the internal ontologoy are URIs (e.g. http://example.org/person/Bob)</li>
+                <li>The used URIs are HTTP URIs (e.g. http://example.org/person/Bob)</li>
+                <li>Looking up an URI provides useful information (e.g. https://schema.org/jobTitle)</li>
+                <li>Entity URIs are linked (e.g. X_URI knows Y_URI), as specified in the internal ontology schema</li>
+            </ul>
         </p>
     </section>
 
