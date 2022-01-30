@@ -7,8 +7,13 @@
     <title>BiDaR Technical Report</title>
     <link rel="stylesheet" href="css/scholarly.css">
     <link rel="stylesheet" href="css/base.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui.css">
     <script src="js/refs.js"></script>
     <script src="js/scholarly.js"></script>
+    <script src="js/openapi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui-bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui-standalone-preset.js"></script>
 </head>
 
 <body prefix="schema: http://schema.org">
@@ -64,9 +69,82 @@
                 </center>
             </figure>
             <p>
-                aasdasdas
+                The internal data model schema is the following:<br>
+                <code>
+                    <pre>
+                        &lt;?xml version="1.0" encoding="utf-8"?&gt;
+                        &lt;rdf:RDF
+                            xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                            xmlns:schema="https://schema.org/"
+                        &gt;
+                            &lt;rdf:Description rdf:about="PERSON_URI"&gt;
+                                &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                                &lt;foaf:age&gt;AGE&lt;/foaf:age&gt;
+                                &lt;foaf:gender&gt;GENDER&lt;/foaf:gender&gt;
+                                &lt;schema:Country rdf:resource="COUNTRY"/&gt;
+                                &lt;schema:City rdf:resource="CITY"/&gt;
+                                &lt;schema:jobTitle rdf:resource="JOB_TITLE"/&gt;
+                                &lt;schema:language rdf:resource="LANGUAGE"/&gt;
+                                &lt;schema:knows rdf:resource="KNOWN_PERSON"/&gt; (LIST)
+                                &lt;foaf:interest rdf:resource="INTEREST"/&gt; (LIST)
+                                &lt;schema:skills rdf:resource="SKILL"/&gt; (LIST)
+                                &lt;schema:artist rdf:resource="ARTIST"/&gt; (LIST)
+                            &lt;/rdf:Description&gt;
+
+                            &lt;rdf:Description rdf:about="INTEREST_URI"&gt;
+                                &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                            &lt;/rdf:Description&gt;
+
+                            &lt;rdf:Description rdf:about="SKILL_URI"&gt;
+                                &lt;rdf:type rdf:resource="https://schema.org/skills"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                            &lt;/rdf:Description&gt;
+
+                            &lt;rdf:Description rdf:about="ARTIST_URI"&gt;
+                                &lt;rdf:type rdf:resource="https://schema.org/artist"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                            &lt;/rdf:Description&gt;
+
+                            &lt;rdf:Description rdf:about="COUNTRY_URI"&gt;
+                                &lt;rdf:type rdf:resource="https://schema.org/Country"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                            &lt;/rdf:Description&gt;
+
+                            &lt;rdf:Description rdf:about="CITY_URI"&gt;
+                                &lt;rdf:type rdf:resource="https://schema.org/City"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                            &lt;/rdf:Description&gt;
+
+                            &lt;rdf:Description rdf:about="LANGUAGE_URI"&gt;
+                                &lt;rdf:type rdf:resource="https://schema.org/Language"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                            &lt;/rdf:Description&gt;
+
+                            &lt;rdf:Description rdf:about="JOB_URI"&gt;
+                                &lt;rdf:type rdf:resource="https://schema.org/jobTitle"/&gt;
+                                &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+                            &lt;/rdf:Description&gt;
+                        &lt;/rdf:RDF&gt;
+                    </pre>
+                </code>
+            </p>
+
+            <p>
+                Each user has a person entry associated, which specifies his name, age, gender, country and city of residence, job title, language, list of known people, list of interests, skills, and list of favorite artists.<br> The other entries in
+                the internal data model specify the names for entries of type interest, skill, artist, country, city, language, or job.
             </p>
         </section>
+    </section>
+
+    <section id="api">
+        <h2>API</h2>
+        <p>
+            The application relies on a REST API in order to handle DBpedia queries and perform additions, updates, deletions, or queries on the internal data model. The <a role="doc-biblioref">OpenAPI</a> specification for the API is the following:
+            <div id="swagger-ui"></div>
+        </p>
     </section>
 
 </body>

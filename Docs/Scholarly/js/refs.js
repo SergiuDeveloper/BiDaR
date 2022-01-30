@@ -10,5 +10,11 @@ let refs = {
         resource="https://profs.info.uaic.ro/~busaco/teach/courses/wade/projects/index.html#:~:text=concept%20%40%20Schema.org.-,bidar,-(big%20data%20retriever">
       <cite property="schema:name"><a href="https://profs.info.uaic.ro/~busaco/teach/courses/wade/projects/index.html#:~:text=concept%20%40%20Schema.org.-,bidar,-(big%20data%20retriever">BiDaR project requirements</a></cite>.
     </dd>
+    `,
+    OpenAPI: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://swagger.io/specification/">
+      <cite property="schema:name"><a href="https://swagger.io/specification/">OpenAPI specification</a></cite>.
+    </dd>
     `
 };
