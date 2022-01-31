@@ -73,16 +73,20 @@ class SparqlProcessor:
         return entity, triples, processed_triples
 
     def get_autocomplete_suggestions(self, text, type):
-        additional_querie = ""
+        additional_queries = ""
         if type == "Favourite Artists":
-            additional_querie = ". [] dbp:artist ?ref"
-        query = 'SELECT DISTINCT ?ref ?label WHERE { ?ref rdfs:label ?label'+ additional_querie +'. FILTER ( regex(?label , "^' + text.replace("_"," ") + '", "i") && langMatches(lang(?label ),"en") ). } ORDER BY ?label LIMIT 10'
+            additional_queries += ". [] dbp:artist ?ref"
+        if type == "Skills":
+            additional_queries += ". ?ref [] dbr:Skill"
+        query = 'SELECT DISTINCT ?ref ?label WHERE { ?ref rdfs:label ?label'+ additional_queries +'. FILTER ( regex(?label , "^' + text.replace("_"," ") + '", "i") && langMatches(lang(?label ),"en") ). } ORDER BY ?label LIMIT 10'
         self.__sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 
         self.__sparql.setQuery(query)
 
         self.__sparql.setReturnFormat(JSON)
         results = self.__sparql.query().convert()["results"]["bindings"]
+        if results == []:
+            results = [{"label": {"value": "no sesource with the label: "+text}, "ref": {"value": ""} }]
         return results
 
     def get_ceva(self, text, type):

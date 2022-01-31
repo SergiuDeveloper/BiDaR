@@ -53,20 +53,22 @@ class OntologyProcessor:
     def get_all_persons(self):
         triples = self.__graph.triples((None, RDF.type, FOAF.Person))
         triples_knows = self.__graph.triples((None, SDO.knows, None))
-        persons = set([re.split('/|#', triple[0].n3())[-1].replace('_', ' ')[:-1] for triple in triples])
-        persons_knows = set([re.split('/|#', triple[0].n3())[-1].replace('_', ' ')[:-1] for triple in triples_knows])
-        return list(persons.intersection(persons_knows))
+        persons = set([(re.split('/|#', triple[0].n3())[-1].replace('_', ' ')[:-1], triple[0]) for triple in triples])
+        persons_knows = set([(re.split('/|#', triple[0].n3())[-1].replace('_', ' ')[:-1], triple[0]) for triple in triples_knows])
+        final_list = list(persons.union(persons_knows))
+        final_list.sort(key=lambda name: name[0])
+        return final_list
 
     def query_interests(self, name):
         person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
         interests = []
-        for predicate in [SDO.Country, SDO.City, SDO.jobTitle, SDO.language, SDO.knows, FOAF.interest, SDO.skills, SDO.artist]:
+        for predicate in [FOAF.interest, SDO.artist]:
             interests.extend([triple[2] for triple in self.__graph.triples((person, predicate, None))])
 
         interests = [re.split('/|#', interest.n3())[-1][:-1].replace('_', ' ') for interest in interests]
         
         sparql_processor = SparqlProcessor()
-        results = sparql_processor.query_information_multithreaded(interests, 'en', 3, 3)
+        results = sparql_processor.query_information_multithreaded(interests, 'en', 5, 5)
         return list(set(results))
 
     def query_all_data(self, name):
@@ -164,7 +166,10 @@ class OntologyProcessor:
         self.__graph_lock.release()
 
     def add_data_to_user(self, user, interest_ref, section):
+        if interest_ref == "":
+            return False
         self.__graph_lock.acquire()
+        print(user, interest_ref, section)
         person = URIRef("http://example.org/person/"+ user.replace(" ","_"))
         interest_ref = URIRef(interest_ref)
         # q = """
@@ -188,6 +193,7 @@ class OntologyProcessor:
         self.__graph.add((person, rel, interest_ref))
 
         self.__graph_lock.release()
+        print({"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref})
 
         return {"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref}
 

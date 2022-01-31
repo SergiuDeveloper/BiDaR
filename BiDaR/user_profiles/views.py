@@ -94,21 +94,6 @@ def ProfiletView(request, user_id):
 def RegisterUserView(request):
     return render(request, 'profile/register_user.html', {})
 
-def searchPreference(request):
-    print("searchPreference call")
-    text = request.GET.get('search_text')
-    # TODO make query base on the text and return results
-    query = 'SELECT ?ref ?label WHERE { ?ref rdfs:label ?label FILTER ( regex(?label , "^' + text.replace("_"," ") + '", "i") && langMatches(lang(?label ),"en") ). } ORDER BY ?label LIMIT 5'
-    # SELECT ?ref ?label WHERE { ?ref rdfs:label ?label FILTER ( regex(?label , "^Romani", "i") && langMatches(lang(?label ),"en") ). } ORDER BY strlen(str(?label)) LIMIT 5
-    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-
-    sparql.setQuery(query)
-
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    return JsonResponse(results["results"]["bindings"], safe=False)
-
-
 def addPreference(request):
     user = request.GET.get('user')
     interest = request.GET.get('interest')

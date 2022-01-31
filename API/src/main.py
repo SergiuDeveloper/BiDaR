@@ -23,7 +23,7 @@ CORS(app)
 
 @app.post('/semantic_web_data')
 def semantic_web_data():
-    text = request.data.decode('utf-8')
+    text = request.get_json(force=True)['text']
 
     nouns = [str(noun) for noun in TextProcessor.extract_nouns(text)]
     language = TextProcessor.detect_language(text)
@@ -32,6 +32,7 @@ def semantic_web_data():
 
     sparql_processor = SparqlProcessor()
     query_data = sparql_processor.query_information_multithreaded(nouns, language, resultsLimit, searchDepth)
+
     return jsonify(query_data)
 
 @app.post('/query_all_data')

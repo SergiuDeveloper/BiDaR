@@ -81,6 +81,31 @@ function populateGraph(networkElementId, triples) {
     new vis.Network(container, data, options);
 }
 
+function getPersons() {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            var responseText = xmlHttp.responseText;
+            var persons = JSON.parse(responseText);
+            console.log(persons);
+            var select = document.getElementById('Knows_input');
+
+            for (var i = 0; i < select.options.length; i++) {
+                select.remove(i);
+            }
+
+            for (var i = 0; i < persons.length; i++) {
+                select.options[i] = new Option(persons[i][0], persons[i][1]);
+            }
+        }
+    }
+    xmlHttp.open('GET', `${URL}/get_all_persons`, true);
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.send(null);
+}
+
 window.onload = debounce(function(e) {
     queryAllFactsOnClick("network");
+    getPersons();
 });
+

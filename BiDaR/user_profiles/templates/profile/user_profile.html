@@ -47,16 +47,19 @@
                     <ul>
                         <div id="{{cat.name}}_list">
                         {% for val in cat.values %}
-                            <li> <a href= "{{val.1}}">{{val.0}}</a> <a href="" class="remove_data text-danger text-decoration-none">X</a></li>
+                            <li> <a href= "{{val.1}}">{{val.0}}</a><a href="" class="remove_data text-danger text-decoration-none"> X</a></li>
                         {% endfor %}
                         </div>
-                        <li><input type="text" class="suggestions" id="{{cat.name}}_input" name=""><button id='add_{{cat.name}}' class="add_to_list">Add {{ cat.name }}</button></li>
+                        <li>
+                            {% if cat.name == 'Knows' %}
+                                <select type="text" class="suggestions" id="{{cat.name}}_input" value=""></select>
+                            {% else %}
+                                <input type="text" class="suggestions" id="{{cat.name}}_input" value="">
+                            {% endif %}
+                        </li>
+                        <button id='add_{{cat.name}}' class="add_to_list">Add {{ cat.name }}</button>
                     </ul>
                 {% endfor %}
-                <!-- </div> -->
-                <div class='inputForm'>
-                    <input type="submit" value="Query all facts about person" onclick="queryAllFactsOnClick('network')"><br>
-                </div>
             </div>
             
             <div id="network"></div>

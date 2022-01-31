@@ -40,7 +40,7 @@ function autocomplete(inp, arr) {
     // create a DIV element that will contain the items (values)
     suggestion_div = document.createElement("DIV");
     suggestion_div.setAttribute("id", inp.id + "autocomplete-list");
-    suggestion_div.setAttribute("class", "autocomplete-items");
+    suggestion_div.setAttribute("class", "border-0");
 
     // append the DIV element as a child of the autocomplete container
     inp.parentNode.appendChild(suggestion_div);
@@ -92,6 +92,7 @@ function fetch_autocomplete_suggestions(event){
     const target_element = event.target;
     const type = event.target.id.split("_")[0];
     let input = target_element.value;
+    remove_error(target_element);
     if (input.trim() != '') {
         let query_params = new URLSearchParams()
         query_params.set('search_text', input)
@@ -128,6 +129,23 @@ function debounce(func, wait = 350, early = false) {
     };
 }
 
+function add_error(input){
+    const parent = input.parentNode;
+    const sibling = input.nextSibling;
+    var error = document.createElement("div");
+    error.classList = 'alert alert-danger';
+    error.role = "alert";
+    error.innerHTML = "Concept does not exist";
+    parent.insertBefore(error,sibling);
+}
+
+function remove_error(input){
+    var error = input.nextSibling;
+    if (error.classList[1] == "alert-danger"){
+        error.remove();
+    }
+}
+
 function update_list(label, ref, section){
     const list = document.getElementById(`${section}_list`);
     var li = document.createElement("li");
@@ -135,7 +153,7 @@ function update_list(label, ref, section){
     var x = document.createElement("a");
     a.href = ref;
     a.innerHTML = label;
-    x.innerHTML = "X"
+    x.innerHTML = " X"
     x.classList = "remove_data text-danger text-decoration-none"
     x.href = ""
     li.appendChild(a);
@@ -144,23 +162,38 @@ function update_list(label, ref, section){
     queryAllFactsOnClick("network");
 }
 
-function add_interest(event){
+function add_data(event){
     const section = event.target.id.split("_")[1];
     const input = document.getElementById(section+'_input');
+    var interest_ref = input.name;
+    if (interest_ref == ""){
+        add_error(input);
+        return 0;
+    }
+    const name = document.getElementById("name").innerHTML;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var responseText = xmlHttp.responseText;
             var responceJSON = JSON.parse(responseText)
-            update_list(responceJSON["label"], responceJSON["ref"], section)
+            if (responceJSON == false){
+                add_error(input);
+            }
+            else{
+                update_list(responceJSON["label"], responceJSON["ref"], section)
+            }
             input.value = "";
         }
     }
-    const interest_ref = input.name;
+    
+    if (section == "Knows"){
+        interest_ref = input.value;
+    }
+
     xmlHttp.open('POST', `${URL}/add_data`, true);
     xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xmlHttp.send(JSON.stringify({
-        'name': "Andrei Ghiran",
+        'name': name,
         'data': interest_ref,
         "section": section
     }));
@@ -203,7 +236,7 @@ const add_element = document.getElementsByClassName('add_to_list');
 for (var i = 0; i<add_element.length; i++){
     var element = add_element[i];
     element.addEventListener("click", debounce(function(e) {
-        add_interest(e);
+        add_data(e);
     })); 
 }
 

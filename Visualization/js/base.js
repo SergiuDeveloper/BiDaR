@@ -20,7 +20,7 @@ function queryFactsOnClick(networkElementId) {
     }
     xmlHttp.open('POST', `${URL}/semantic_web_data?resultsLimit=${maxResults}&searchDepth=${searchDepth}`, true);
     xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xmlHttp.send(textInput);
+    xmlHttp.send(JSON.stringify({"text": textInput,"name": "Andrei Ghiran"}));
 }
 
 function addPersonOnClick(networkElementId) {
