@@ -40,5 +40,23 @@ let refs = {
         resource="https://www.w3.org/wiki/LinkedData">
       <cite property="schema:name"><a href="https://www.w3.org/wiki/LinkedData">LinkedData principles</a></cite>.
     </dd>
+    `,
+    Django: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://www.djangoproject.com/">
+      <cite property="schema:name"><a href="https://www.djangoproject.com/">Django framwork</a></cite>.
+    </dd>
+    `,
+    Bootstrap: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://getbootstrap.com/">
+      <cite property="schema:name"><a href="https://getbootstrap.com/">Bootstrap</a></cite>.
+    </dd>
+    `,
+    Javascript: `
+    <dd property="schema:citation" typeof="schema:WebPage"
+        resource="https://www.javascript.com/">
+      <cite property="schema:name"><a href="https://www.javascript.com/">Javascript</a></cite>.
+    </dd>
     `
 };

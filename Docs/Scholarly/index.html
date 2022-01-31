@@ -278,6 +278,35 @@
         </section>
     </section>
 
+    <section id="Aplication dscription">
+        <h2>User Interface</h2>
+        <section id="django-section">
+            <h3>Django framework server</h3>
+            <p>
+                The <a role="doc-biblioref">Django</a> web server provides the user interface layer witch then is used to make calls to the different API endpoints of our service.
+                We chose the django framework because it supports a great way to customise the user interface by dynamically generating html files 
+                by using parts of static HTML code and some special syntax describing how dynamic content will be inserted. This feature allows us to created
+                a more flexible user interface that can addapt to different data sets provided by the backend portion of the server. One example would be that if
+                we wanted to add a new category of user-related data, simillar to interests and skills, the html template coresponding to the user profile page 
+                would be unaffected by this change.
+            </p>
+        </section>
+        <section id="bootstrap-section">
+            <h3>Bootstrap</h3>
+            <p>
+                For the UI styling part we used a combination of css code that we developed and <a role="doc-biblioref">Bootstrap</a> classes. We cose Bootstrap because it simplifies the task of styleing the 
+                user interface and it is well suited for the development of the minimalist user interface witch we wanted to achieve.
+            </p>
+        </section>
+        <section id="javascript-section">
+            <h3>Javascript</h3>
+            <p>
+                <a role="doc-biblioref">Javascript</a> is mainly used for some calls to the BiDaR API service witch can not be made from the django server. There are some instances where jabascript is used to 
+                update the information shown in the user interface after a successfull API call, such as when a new interest is added to a user's data or to create the data grapths. 
+            </p>
+        </section>
+    </section>
+
     <section id="linked-data-principles">
         <h2>Linked Data Principles</h2>
         <p>
@@ -290,6 +319,7 @@
             </ul>
         </p>
     </section>
+
 
 </body>
 
