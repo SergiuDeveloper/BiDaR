@@ -39,8 +39,8 @@ function autocomplete(inp, arr) {
 
     // create a DIV element that will contain the items (values)
     suggestion_div = document.createElement("DIV");
-    suggestion_div.setAttribute("id", inp.id + "autocomplete-list");
-    suggestion_div.setAttribute("class", "border-0");
+    suggestion_div.setAttribute("id", inp.id + "_autocomplete-list");
+    suggestion_div.setAttribute("class", "autocomplete-items border");
 
     // append the DIV element as a child of the autocomplete container
     inp.parentNode.appendChild(suggestion_div);
@@ -130,20 +130,15 @@ function debounce(func, wait = 350, early = false) {
 }
 
 function add_error(input){
-    const parent = input.parentNode;
-    const sibling = input.nextSibling;
-    var error = document.createElement("div");
+    var error = document.getElementById(input.id.split("_")[0] +"_error");
     error.classList = 'alert alert-danger';
     error.role = "alert";
     error.innerHTML = "Concept does not exist";
-    parent.insertBefore(error,sibling);
 }
 
 function remove_error(input){
-    var error = input.nextSibling;
-    if (error.classList[1] == "alert-danger"){
-        error.remove();
-    }
+    var error = document.getElementById(input.id.split("_")[0] +"_error");
+    error.classList = "d-none"
 }
 
 function update_list(label, ref, section){

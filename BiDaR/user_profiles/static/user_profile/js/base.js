@@ -87,7 +87,6 @@ function getPersons() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var responseText = xmlHttp.responseText;
             var persons = JSON.parse(responseText);
-            console.log(persons);
             var select = document.getElementById('Knows_input');
 
             for (var i = 0; i < select.options.length; i++) {

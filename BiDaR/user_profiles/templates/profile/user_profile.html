@@ -56,8 +56,9 @@
                             {% else %}
                                 <input type="text" class="suggestions" id="{{cat.name}}_input" value="">
                             {% endif %}
+                                <div id="{{cat.name}}_error" class="d-none"></div>
                         </li>
-                        <button id='add_{{cat.name}}' class="add_to_list">Add {{ cat.name }}</button>
+                        <button id='add_{{cat.name}}' class="add_to_list">Add {{ cat.name|slice:":-1" }}</button>
                     </ul>
                 {% endfor %}
             </div>
