@@ -10,7 +10,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 def ProfiletView(request, user_id):
     # TODO make query for user_id profile
 
-    context = {}
+    context = {"title": f'{user_id.replace("_"," ")} Profile'}
     categories = []
     context["name"] = user_id.replace("_"," ")
 
@@ -75,23 +75,11 @@ def ProfiletView(request, user_id):
     return render(request, 'profile/user_profile.html', context)
 
 def AddUserView(request):
-    return render(request, 'profile/add_user.html', {})
+    context= {"title": "Add user"}
+    return render(request, 'profile/add_user.html', context)
 
-def addPreference(request):
-    user = request.GET.get('user')
-    interest = request.GET.get('interest')
 
-    url = 'http://localhost:8080/add_interest'
-    data = {
-        'name': user,
-        'interest': interest
-    }
-    headers = {"Access-Control-Allow-Origin": "*"}
-    requests.post(url, data=json.dumps(data), headers=headers)
-
-    return JsonResponse([], safe=False)
-
-def LogIn(request):
-    context= {}
-    return render(request, 'profile/log_in.html', context)
+def PickUserView(request):
+    context= {"title": "Pick user"}
+    return render(request, 'profile/pick_user.html', context)
 

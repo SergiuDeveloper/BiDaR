@@ -60,7 +60,7 @@ class OntologyProcessor:
         return final_list
 
     def query_interests(self, name):
-        person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
+        person = URIRef('http://localhost:8000/profile/{}'.format(name.replace(' ', '_')))
         interests = []
         for predicate in [FOAF.interest, SDO.artist]:
             interests.extend([triple[2] for triple in self.__graph.triples((person, predicate, None))])
@@ -73,7 +73,7 @@ class OntologyProcessor:
 
     def query_all_data(self, name):
         self.__graph_lock.acquire()
-        person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
+        person = URIRef('http://localhost:8000/profile/{}'.format(name.replace(' ', '_')))
         results1 = list(self.__graph.triples((person, None, None)))
         results2 = list(self.__graph.triples((None, None, person)))
         results1 = [(
@@ -104,7 +104,7 @@ class OntologyProcessor:
     def add_person(self, name, age, gender, country, city, job_title, language, friends, interests, skills, favorite_artists):
         self.__graph_lock.acquire()
 
-        person = URIRef('http://example.org/person/{}'.format(name.replace(' ', '_')))
+        person = URIRef('http://localhost:8000/profile/{}'.format(name.replace(' ', '_')))
 
         self.__graph.add((person, RDF.type, FOAF.Person))
         self.__graph.add((person, FOAF.name, Literal(name)))
@@ -137,7 +137,7 @@ class OntologyProcessor:
 
         for friend in friends:
             name = Literal(friend)
-            friend = URIRef('http://example.org/person/{}'.format(friend.replace(' ', '_')))
+            friend = URIRef('http://localhost:8000/profile/{}'.format(friend.replace(' ', '_')))
             self.__graph.add((friend, RDF.type, FOAF.Person))
             self.__graph.add((friend, FOAF.name, name))
             self.__graph.add((person, SDO.knows, friend))
@@ -170,7 +170,7 @@ class OntologyProcessor:
             return False
         self.__graph_lock.acquire()
         print(user, interest_ref, section)
-        person = URIRef("http://example.org/person/"+ user.replace(" ","_"))
+        person = URIRef("http://localhost:8000/profile/"+ user.replace(" ","_"))
         interest_ref = URIRef(interest_ref)
         # q = """
         #         INSERT DATA {  %s %s %s
@@ -199,7 +199,7 @@ class OntologyProcessor:
 
     def remove_data_from_user(self, user, data_ref, section):
         self.__graph_lock.acquire()
-        person = URIRef("http://example.org/person/"+ user.replace(" ","_"))
+        person = URIRef("http://localhost:8000/profile/"+ user.replace(" ","_"))
         interest_ref = URIRef(data_ref)
         # q = """
         #         INSERT DATA {  %s %s %s
