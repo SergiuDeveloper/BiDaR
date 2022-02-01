@@ -48,7 +48,36 @@ function populateSwaggerUI() {
                     },
                     "responses": {
                         "200": {
-                            "description": "List of triples (subject predicate object), which represent facts queries recursively from DBpedia"
+                            "description": "List of triples (subject predicate object), which represent facts queried recursively from DBpedia"
+                        }
+                    }
+                }
+            },
+            "/related_to_interests": {
+                "post": {
+                    "description": "Queries DBpedia in order to retrieve data related to the nouns identified in the request body. The method used is POST in order to place data in the request body",
+                    "requestBody": {
+                        "description": "The name of the user making the querry and a list containing the nouns identified in the querry",
+                        "required": true,
+                        "content": {
+                            "schema": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "schema2":{
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "List of triples (subject predicate object), which represent the related facts queried from DBpedia"
                         }
                     }
                 }
@@ -163,7 +192,7 @@ function populateSwaggerUI() {
                             },
                             "name": "friends",
                             "in": "header",
-                            "required": true,
+                            "required": false,
                             "description": "The person's list of known people"
                         },
                         {
@@ -172,7 +201,7 @@ function populateSwaggerUI() {
                             },
                             "name": "interests",
                             "in": "header",
-                            "required": true,
+                            "required": false,
                             "description": "The person's list of interests"
                         },
                         {
@@ -181,7 +210,7 @@ function populateSwaggerUI() {
                             },
                             "name": "skills",
                             "in": "header",
-                            "required": true,
+                            "required": false,
                             "description": "The person's list of skills"
                         },
                         {
@@ -190,7 +219,7 @@ function populateSwaggerUI() {
                             },
                             "name": "favoriteArtists",
                             "in": "header",
-                            "required": true,
+                            "required": false,
                             "description": "The person's list of favorite artists"
                         }
                     ],
