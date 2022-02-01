@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+	  <title>BiDaR Login</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div class="right-side">
+		<p class="h1">Login</p>
+		<form id="login_form">
+			<div class="form-group">
+			<label>Email:</label>
+			<br>
+			<input class="form-control" type="text" name="email" placeholder="Email">
+			</div>
+
+			<div class="form-group">
+			<!-- <label>Password:</label>
+			<br>
+			<input class="form-control" type="password" name="password" placeholder="Password">
+			</div>
+			<br> -->
+
+			<input class="btn btn-primary" type="submit" name="submit" value="Login">
+			<br>
+			<p>You don't have an account? </p>
+			<a href="#">Register here!</a>
+		</form>
+		</div>
+	</body>
+    <script>
+        const URL = 'http://localhost:8080'
+
+        function logIn(){
+            var email = document.getElementsByName("email")[0].value;
+
+            var xmlHttp = new XMLHttpRequest();
+                
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    var responseText = xmlHttp.responseText;
+                    console.log(responseText);
+                    // var triples = JSON.parse(responseText)
+                    // populateGraph(networkElementId, triples)
+                }
+            }
+            xmlHttp.open('POST', `http://localhost:8080/verify_user`, true);
+            xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xmlHttp.send(JSON.stringify({"email": email}));
+            
+            // console.log(response);
+            // sessionStorage.setItem("username","Andrei Ghiran");
+            // sessionStorage.setItem("email","ghiranandrei@gmail.com");
+
+            console.log("loged in");
+        }
+        const form = document.getElementById("login_form");
+        form.addEventListener('submit', logIn());
+    </script>
+</html>

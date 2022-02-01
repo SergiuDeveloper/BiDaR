@@ -1,0 +1,28 @@
+#network {
+    width: 72.5vw;
+    height: 83vh;
+    border: 1px solid lightgray;
+    float: left;
+    margin-left: 1cm;
+    margin-top: 0.3cm;
+}
+
+#forms {
+    float: left;
+}
+
+.inputForm {
+    padding-left: 1cm;
+    padding-top: 0.3cm;
+    margin-bottom: 0.8cm;
+}
+
+input {
+    margin-bottom: 0.1cm;
+    width: 100%;
+}
+
+select {
+    margin-bottom: 0.1cm;
+    width: 100%;
+}

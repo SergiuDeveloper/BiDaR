@@ -20,7 +20,7 @@ function queryFactsOnClick(networkElementId) {
     }
     xmlHttp.open('POST', `${URL}/semantic_web_data?resultsLimit=${maxResults}&searchDepth=${searchDepth}`, true);
     xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xmlHttp.send(textInput);
+    xmlHttp.send(JSON.stringify({"text": textInput,"name": "Andrei Ghiran"}));
 }
 
 function addPersonOnClick(networkElementId) {
@@ -204,8 +204,8 @@ function getPersons() {
                 select2.remove(i);
             }
             for (var i = 0; i < persons.length; i++) {
-                select1.options[i] = new Option(persons[i], persons[i]);
-                select2.options[i] = new Option(persons[i], persons[i]);
+                select1.options[i] = new Option(persons[i][0], persons[i][1]);
+                select2.options[i] = new Option(persons[i][0], persons[i][1]);
             }
         }
     }

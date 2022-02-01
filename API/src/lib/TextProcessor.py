@@ -35,9 +35,14 @@ class TextProcessor:
         nlp = spacy.load(language)
         
         doc = nlp(text)
-        nouns = [word.lemma_ for word in doc if word.pos_ in ['NOUN', 'PROPN']]
+        # nouns = [word.lemma_ for word in doc if word.pos_ in ['NOUN', 'PROPN']]
+        my_nouns = []
 
-        return nouns
+        # noticed that doc.noun_chunks behaves better for what we need the nouns for
+        for np in doc.noun_chunks:
+           my_nouns.append(np.text)
+
+        return my_nouns
 
     @staticmethod
     def detect_language(text, nlp=None):
