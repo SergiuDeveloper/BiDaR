@@ -66,23 +66,6 @@ def ProfiletView(request, user_id):
     skills.sort()
     knows.sort()
     artists.sort()
-    # query = """            
-    #     SELECT DISTINCT ?genre ?lable
-    #     {
-    #         ?genre a <http://dbpedia.org/ontology/MusicGenre>.
-    #         ?genre <http://www.w3.org/2000/01/rdf-schema#label> ?lable.
-    #     FILTER( lang(?lable) = "en" )
-    #     } LIMIT 10
-    # """
-    # sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-
-    # sparql.setQuery(query)
-
-    # sparql.setReturnFormat(JSON)
-    # results = sparql.query().convert()
-
-    # for result in results["results"]["bindings"]:
-    #     print(f'{result["genre"]["value"]} {result["lable"]["value"]}' )
 
     categories.append({'name' : 'Interests', 'values' : interests})
     categories.append({'name' : 'Skills', 'values' : skills})
@@ -91,8 +74,8 @@ def ProfiletView(request, user_id):
     
     return render(request, 'profile/user_profile.html', context)
 
-def RegisterUserView(request):
-    return render(request, 'profile/register_user.html', {})
+def AddUserView(request):
+    return render(request, 'profile/add_user.html', {})
 
 def addPreference(request):
     user = request.GET.get('user')

@@ -110,3 +110,4 @@ __pycache__/
 >>>>>>> DataProcessing
 
 .idea/
+*.pyc
