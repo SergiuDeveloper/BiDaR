@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BiDaR Technical Report</title>
+    <link rel="stylesheet" href="css/scholarly.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui.css">
+    <script src="js/refs.js"></script>
+    <script src="js/scholarly.js"></script>
+    <script src="js/openapi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui-bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui-standalone-preset.js"></script>
+</head>
+
+<body prefix="schema: http://schema.org">
+
+    <header>
+        <h1>BiDaR Technical Report</h1>
+    </header>
+
+    <div role="contentinfo">
+        <dl>
+            <dt>Authors</dt>
+            <dd>
+                Nistor Marian-Sergiu (MSD1)
+            </dd>
+            <dd>
+                Ghiran Andrei (MSD1)
+            </dd>
+
+            <dt>Coordinator</dt>
+            <dd>
+                Dr. Sabin-Corneliu Buraga
+            </dd>
+        </dl>
+    </div>
+
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+        <h2>Abstract</h2>
+        <p>
+            There are plenty of interesting resources provided by various knowledge Web systems like <a role="doc-biblioref">DBpedia</a>. <a role="doc-biblioref">BiDaR</a>, which stands for "big data retriever", represents a micro-service-based platform
+            able to intelligently query, visualize large sets of data and additional resources according to the user's needs and preferences. The platform takes into consideration the user's preferences and entourage. Given a set of areas of interest,
+            the platform also provides support for suggesting topics that could be of interest for the user.
+        </p>
+    </section>
+
+    <section id="data-description">
+        <h2>Data Description</h2>
+        <p>
+            The data used by BiDaR is either acquired from external sources such as <a role="doc-biblioref">DBpedia</a>, or is queried from the internal ontology. External sources are used for querying data that is supposed to be of interest for the user,
+            based on his preferences. The internal data model is used for storing relationships between the user and his areas of interest, location, age, peers, and so on.
+        </p>
+
+        <section id="internal-data-model">
+            <h3>Internal Ontology</h3>
+            <figure typeof="sa:image" resource="#internal-data-model" id="internal-data-model" role="doc-example">
+                <center>
+                    <img src="media/internal-data-model.png" alt="Internal Data Model" id="internal-data-model-img">
+                    <figcaption>
+                        <span property="schema:name">Figure 1.</span>
+                        <span property="schema:description">The internal data model for BiDaR</span>
+                    </figcaption>
+                </center>
+            </figure>
+            <p>
+                The internal data model is represented by a <a role="doc-biblioref">RDF</a> ontology. The data model schema is the following:<br>
+                <figure typeof="schema:SoftwareSourceCode" role="doc-example" id="internal-ontology-schema">
+                    <pre><code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:schema="https://schema.org/"
+&gt;
+    &lt;rdf:Description rdf:about="PERSON_URI"&gt;
+        &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+        &lt;foaf:age&gt;AGE&lt;/foaf:age&gt;
+        &lt;foaf:gender&gt;GENDER&lt;/foaf:gender&gt;
+        &lt;schema:Country rdf:resource="COUNTRY"/&gt;
+        &lt;schema:City rdf:resource="CITY"/&gt;
+        &lt;schema:jobTitle rdf:resource="JOB_TITLE"/&gt;
+        &lt;schema:language rdf:resource="LANGUAGE"/&gt;
+        &lt;schema:knows rdf:resource="KNOWN_PERSON"/&gt; (LIST)
+        &lt;foaf:interest rdf:resource="INTEREST"/&gt; (LIST)
+        &lt;schema:skills rdf:resource="SKILL"/&gt; (LIST)
+        &lt;schema:artist rdf:resource="ARTIST"/&gt; (LIST)
+    &lt;/rdf:Description&gt;
+
+    &lt;rdf:Description rdf:about="INTEREST_URI"&gt;
+        &lt;rdf:type rdf:resource="http://xmlns.com/foaf/0.1/interest"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+
+    &lt;rdf:Description rdf:about="SKILL_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/skills"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+
+    &lt;rdf:Description rdf:about="ARTIST_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/artist"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+
+    &lt;rdf:Description rdf:about="COUNTRY_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/Country"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+
+    &lt;rdf:Description rdf:about="CITY_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/City"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+
+    &lt;rdf:Description rdf:about="LANGUAGE_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/Language"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+
+    &lt;rdf:Description rdf:about="JOB_URI"&gt;
+        &lt;rdf:type rdf:resource="https://schema.org/jobTitle"/&gt;
+        &lt;foaf:name&gt;NAME&lt;/foaf:name&gt;
+    &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;
+                    </pre></code>
+                </figure>
+            </p>
+
+            <p>
+                Each user has a person entry associated, which specifies his name, age, gender, country and city of residence, job title, language, list of known people, list of interests, skills, and list of favorite artists.<br> The other entries in
+                the internal data model specify the names for entries of type interest, skill, artist, country, city, language, or job.
+            </p>
+        </section>
+    </section>
+
+    <section id="api">
+        <h2>API</h2>
+        <section id="open-api">
+            <h3>OpenAPI Specification</h3>
+            <p>
+                The application relies on a REST API in order to handle DBpedia queries and perform additions, updates, deletions, or queries on the internal data model. The <a role="doc-biblioref">OpenAPI</a> specification for the API is the following:
+                <div id="swagger-ui"></div>
+            </p>
+        </section>
+
+        <section id="technical-aspects">
+            <h3>API Modules</h3>
+            <p>
+                The logic for the API revolves around the usage of 3 processors:
+                <ul>
+                    <li>The ontology processor</li>
+                    <li>The Sparql processor</li>
+                    <li>The text processor</li>
+                </ul>
+                The ontology processor represents a wrapper for the internal <a role="doc-biblioref">RDF</a> ontology, which is used to stored user data. The ontology backup daemon is a thread that runs in the background, creating disk backups for the
+                ontology (which is also stored in memory), to ensure that the data is not lost, in case of a failure.<br> The <a role="doc-biblioref">Sparql</a> processor is used in order to retrieve data from <a role="doc-biblioref">DBpedia</a>. When
+                querying information, the requests are being executed in parallel, using a <a role="doc-biblioref">MapReduce</a>-like approach.<br> The text processor is used in order to execute the NLP pipeline on input text data, performing POS tagging
+                and providing a parallel language detection mechanism.
+            </p>
+        </section>
+
+        <section id="architecture">
+            <h3>Architecture</h3>
+            <p>
+                <section id="class-diagrams">
+                    <h4>Class Diagrams</h4>
+                    <figure typeof="sa:image" resource="#class-diagram" id="class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/class-diagram.png" alt="Class Diagram" id="class-diagram-img">
+                            <figcaption>
+                                <span property="schema:name">Figure 2.</span>
+                                <span property="schema:description">Class diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+                </section>
+
+                <section id="components-diagrams">
+                    <h4>Components Diagrams</h4>
+                    <figure typeof="sa:image" resource="#class-diagram" id="components-diagram" role="doc-example">
+                        <center>
+                            <img src="media/components-diagram.png" alt="Components Diagram" id="components-diagram-img">
+                            <figcaption>
+                                <span property="schema:name">Figure 3.</span>
+                                <span property="schema:description">Components diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+                </section>
+
+                <section id="flow-diagrams">
+                    <h4>Flow Diagrams</h4>
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/add-data.png" alt="/add-data Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 4.</span>
+                                <span property="schema:description">/add-data flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/add-person.png" alt="/add-person Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 5.</span>
+                                <span property="schema:description">/add-person flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/autocomplete-suggestions.png" alt="/autocomplete-suggestions Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 6.</span>
+                                <span property="schema:description">/autocomplete-suggestions flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/get-persons.png" alt="/get-persons Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 7.</span>
+                                <span property="schema:description">/get-persons flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/query-all-data.png" alt="/query-all-data Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 8.</span>
+                                <span property="schema:description">/query-all-data flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/query-interests.png" alt="/query-interests Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 9.</span>
+                                <span property="schema:description">/query-interests flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/remove-data.png" alt="/remove-data Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 10.</span>
+                                <span property="schema:description">/remove-data flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+
+                    <figure typeof="sa:image" resource="#class-diagram" role="doc-example">
+                        <center>
+                            <img src="media/semantic-web-data.png" alt="/semantic-web-data Flow Diagram">
+                            <figcaption>
+                                <span property="schema:name">Figure 11.</span>
+                                <span property="schema:description">/semantic-web-data flow diagram</span>
+                            </figcaption>
+                        </center>
+                    </figure>
+                </section>
+            </p>
+        </section>
+    </section>
+
+    <section id="Aplication dscription">
+        <h2>User Interface</h2>
+        <section id="django-section">
+            <h3>Django framework server</h3>
+            <p>
+                The <a role="doc-biblioref">Django</a> web server provides the user interface layer witch then is used to make calls to the different API endpoints of our service.
+                We chose the django framework because it supports a great way to customise the user interface by dynamically generating html files 
+                by using parts of static HTML code and some special syntax describing how dynamic content will be inserted. This feature allows us to created
+                a more flexible user interface that can addapt to different data sets provided by the backend portion of the server. One example would be that if
+                we wanted to add a new category of user-related data, simillar to interests and skills, the html template coresponding to the user profile page 
+                would be unaffected by this change.
+            </p>
+        </section>
+        <section id="bootstrap-section">
+            <h3>Bootstrap</h3>
+            <p>
+                For the UI styling part we used a combination of css code that we developed and <a role="doc-biblioref">Bootstrap</a> classes. We cose Bootstrap because it simplifies the task of styleing the 
+                user interface and it is well suited for the development of the minimalist user interface witch we wanted to achieve.
+            </p>
+        </section>
+        <section id="javascript-section">
+            <h3>Javascript</h3>
+            <p>
+                <a role="doc-biblioref">Javascript</a> is mainly used for some calls to the BiDaR API service witch can not be made from the django server. There are some instances where jabascript is used to 
+                update the information shown in the user interface after a successfull API call, such as when a new interest is added to a user's data or to create the data grapths. 
+            </p>
+        </section>
+    </section>
+
+    <section id="linked-data-principles">
+        <h2>Linked Data Principles</h2>
+        <p>
+            The solution conforms to the <a role="doc-biblioref">LinkedData</a> principles, given the fact that:
+            <ul>
+                <li>The names for the entities in the internal ontologoy are URIs (e.g. http://example.org/person/Bob)</li>
+                <li>The used URIs are HTTP URIs (e.g. http://example.org/person/Bob)</li>
+                <li>Looking up an URI provides useful information (e.g. https://schema.org/jobTitle)</li>
+                <li>Entity URIs are linked (e.g. X_URI knows Y_URI), as specified in the internal ontology schema</li>
+            </ul>
+        </p>
+    </section>
+
+
+</body>
+
+</html>
