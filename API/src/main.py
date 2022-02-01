@@ -49,7 +49,7 @@ def query_interests():
 
 @app.post('/add_person')
 def add_person():
-    ontology_processor.add_person(
+    result = ontology_processor.add_person(
         request.get_json(force=True)['name'],
         request.get_json(force=True)['age'],
         request.get_json(force=True)['gender'],
@@ -57,12 +57,11 @@ def add_person():
         request.get_json(force=True)['city'],
         request.get_json(force=True)['jobTitle'],
         request.get_json(force=True)['language'],
-        request.get_json(force=True)['friends'],
-        request.get_json(force=True)['interests'],
-        request.get_json(force=True)['skills'],
-        request.get_json(force=True)['favoriteArtists']
+        request.get_json(force=True)['friends'] if "friends" in request.get_json(force=True).keys() else [],
+        request.get_json(force=True)['interests'] if "interests" in request.get_json(force=True).keys() else [],
+        request.get_json(force=True)['skills'] if "skills" in request.get_json(force=True).keys() else [],
+        request.get_json(force=True)['favoriteArtists'] if "favoriteArtists" in request.get_json(force=True).keys() else []
     )
-    result = ontology_processor.query_all_data(request.get_json(force=True)['name'])
     return jsonify(result)
 
 @app.get('/get_all_persons')

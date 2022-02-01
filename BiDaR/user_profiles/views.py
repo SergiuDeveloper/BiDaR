@@ -8,22 +8,11 @@ import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 def ProfiletView(request, user_id):
-    # TODO make query for user_id profile
-
     context = {"title": f'{user_id.replace("_"," ")} Profile'}
     categories = []
     context["name"] = user_id.replace("_"," ")
 
     context["categories"] = categories
-    # context["list"] = [1,2,3,4,5]
-
-    # url = 'http://localhost:8080/add_interest'
-    # data = {
-    #     'name': "Andrei Ghiran",
-        # 'interest': "http://dbpedia.org/resource/Eminem"
-    # }
-    # headers = {"Access-Control-Allow-Origin": "*"}
-    # requests.post(url, data=json.dumps(data), headers=headers)
 
     url = 'http://localhost:8080/query_all_data'
     data = {

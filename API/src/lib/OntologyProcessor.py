@@ -101,75 +101,82 @@ class OntologyProcessor:
 
         return list(set(results1))
 
-    def add_person(self, name, age, gender, country, city, job_title, language, friends, interests, skills, favorite_artists):
+    def add_person(self, name, age, gender, country, city, job_title, language, friends=[], interests=[], skills=[], favorite_artists=[]):
+        if self.query_all_data(name) != []:
+            return {"message": "User {} already exists".format(name.replace(' ', '_')), "ref": 'http://localhost:8000/profile/{}'.format(name.replace(' ', '_'))}
+
         self.__graph_lock.acquire()
+        try:
+            person = URIRef('http://localhost:8000/profile/{}'.format(name.replace(' ', '_')))
+            self.__graph.add((person, RDF.type, FOAF.Person))
+            self.__graph.add((person, FOAF.name, Literal(name)))
+            self.__graph.add((person, FOAF.age, Literal(age)))
+            self.__graph.add((person, SDO.gender, Literal(gender)))
 
-        person = URIRef('http://localhost:8000/profile/{}'.format(name.replace(' ', '_')))
+            country_name = country
+            country = URIRef('http://example.org/country/{}'.format(country.replace(' ', '_')))
+            self.__graph.add((country, RDF.type, SDO.Country))
+            self.__graph.add((country, FOAF.name, Literal(country_name)))
+            self.__graph.add((person, SDO.Country, country))
 
-        self.__graph.add((person, RDF.type, FOAF.Person))
-        self.__graph.add((person, FOAF.name, Literal(name)))
-        self.__graph.add((person, FOAF.age, Literal(age)))
-        self.__graph.add((person, FOAF.gender, Literal(gender)))
+            city_name = city
+            city = URIRef('http://example.org/city/{}'.format(city.replace(' ', '_')))
+            self.__graph.add((city, RDF.type, SDO.City))
+            self.__graph.add((city, FOAF.name, Literal(city_name)))
+            self.__graph.add((person, SDO.City, city))
 
-        country_name = country
-        country = URIRef('http://example.org/country/{}'.format(country.replace(' ', '_')))
-        self.__graph.add((country, RDF.type, SDO.Country))
-        self.__graph.add((country, FOAF.name, Literal(country_name)))
-        self.__graph.add((person, SDO.Country, country))
+            job_title_name = job_title
+            job_title = URIRef('http://example.org/jobTitle/{}'.format(job_title.replace(' ', '_')))
+            self.__graph.add((job_title, RDF.type, SDO.jobTitle))
+            self.__graph.add((job_title, FOAF.name, Literal(job_title_name)))
+            self.__graph.add((person, SDO.jobTitle, job_title))
 
-        city_name = city
-        city = URIRef('http://example.org/city/{}'.format(city.replace(' ', '_')))
-        self.__graph.add((city, RDF.type, SDO.City))
-        self.__graph.add((city, FOAF.name, Literal(city_name)))
-        self.__graph.add((person, SDO.City, city))
+            language_name = language
+            language = URIRef('http://example.org/language/{}'.format(language.replace(' ', '_')))
+            self.__graph.add((language, RDF.type, SDO.language))
+            self.__graph.add((language, FOAF.name, Literal(language_name)))
+            self.__graph.add((person, SDO.language, language))
 
-        job_title_name = job_title
-        job_title = URIRef('http://example.org/jobTitle/{}'.format(job_title.replace(' ', '_')))
-        self.__graph.add((job_title, RDF.type, SDO.jobTitle))
-        self.__graph.add((job_title, FOAF.name, Literal(job_title_name)))
-        self.__graph.add((person, SDO.jobTitle, job_title))
+            for friend in friends:
+                name = Literal(friend)
+                friend = URIRef('http://localhost:8000/profile/{}'.format(friend.replace(' ', '_')))
+                self.__graph.add((friend, RDF.type, FOAF.Person))
+                self.__graph.add((friend, FOAF.name, name))
+                self.__graph.add((person, SDO.knows, friend))
 
-        language_name = language
-        language = URIRef('http://example.org/language/{}'.format(language.replace(' ', '_')))
-        self.__graph.add((language, RDF.type, SDO.language))
-        self.__graph.add((language, FOAF.name, Literal(language_name)))
-        self.__graph.add((person, SDO.language, language))
+            for interest in interests:
+                name = Literal(interest)
+                interest = URIRef('http://example.org/interest/{}'.format(interest.replace(' ', '_')))
+                self.__graph.add((interest, RDF.type, FOAF.interest))
+                self.__graph.add((interest, FOAF.name, name))
+                self.__graph.add((person, FOAF.interest, interest))
 
-        for friend in friends:
-            name = Literal(friend)
-            friend = URIRef('http://localhost:8000/profile/{}'.format(friend.replace(' ', '_')))
-            self.__graph.add((friend, RDF.type, FOAF.Person))
-            self.__graph.add((friend, FOAF.name, name))
-            self.__graph.add((person, SDO.knows, friend))
+            for skill in skills:
+                name = Literal(skill)
+                skill = URIRef('http://example.org/skill/{}'.format(skill.replace(' ', '_')))
+                self.__graph.add((skill, RDF.type, SDO.skills))
+                self.__graph.add((skill, FOAF.name, name))
+                self.__graph.add((person, SDO.skills, skill))
 
-        for interest in interests:
-            name = Literal(interest)
-            interest = URIRef('http://example.org/interest/{}'.format(interest.replace(' ', '_')))
-            self.__graph.add((interest, RDF.type, FOAF.interest))
-            self.__graph.add((interest, FOAF.name, name))
-            self.__graph.add((person, FOAF.interest, interest))
-
-        for skill in skills:
-            name = Literal(skill)
-            skill = URIRef('http://example.org/skill/{}'.format(skill.replace(' ', '_')))
-            self.__graph.add((skill, RDF.type, SDO.skills))
-            self.__graph.add((skill, FOAF.name, name))
-            self.__graph.add((person, SDO.skills, skill))
-
-        for favorite_artist in favorite_artists:
-            name = Literal(favorite_artist)
-            favorite_artist = URIRef('http://example.org/artist/{}'.format(favorite_artist.replace(' ', '_')))
-            self.__graph.add((favorite_artist, RDF.type, SDO.artist))
-            self.__graph.add((favorite_artist, FOAF.name, name))
-            self.__graph.add((person, SDO.artist, favorite_artist))
-
+            for favorite_artist in favorite_artists:
+                name = Literal(favorite_artist)
+                favorite_artist = URIRef('http://example.org/artist/{}'.format(favorite_artist.replace(' ', '_')))
+                self.__graph.add((favorite_artist, RDF.type, SDO.artist))
+                self.__graph.add((favorite_artist, FOAF.name, name))
+                self.__graph.add((person, SDO.artist, favorite_artist))
+        except Exception as e:
+            print(f'Error in OntologyProcessor.add_person --- {e}')
+            self.__graph_lock.release()
+            return {"message": "Error", "ref": ''}
+            
         self.__graph_lock.release()
+
+        return {"message": "Success", "ref": 'http://localhost:8000/profile/{}'.format(name.replace(' ', '_'))}
 
     def add_data_to_user(self, user, interest_ref, section):
         if interest_ref == "":
             return False
         self.__graph_lock.acquire()
-        print(user, interest_ref, section)
         person = URIRef("http://localhost:8000/profile/"+ user.replace(" ","_"))
         interest_ref = URIRef(interest_ref)
         # q = """
@@ -195,7 +202,6 @@ class OntologyProcessor:
             self.__graph.add((interest_ref, rel, person))
 
         self.__graph_lock.release()
-        print({"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref})
 
         return {"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref}
 
