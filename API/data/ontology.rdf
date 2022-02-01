@@ -250,7 +250,7 @@
     <schema1:artist rdf:resource="http://dbpedia.org/resource/Eazy-E"/>
     <schema1:jobTitle rdf:resource="http://example.org/jobTitle/asdas"/>
     <schema1:artist rdf:resource="http://dbpedia.org/resource/Eminem"/>
-    <foaf1:knows rdf:resource="http://localhost:8000/profile/Sergiu"/>
+    <schema1:knows rdf:resource="http://localhost:8000/profile/Sergiu"/>
     <schema1:skills rdf:resource="http://dbpedia.org/resource/Leadership"/>
     <foaf1:age>23</foaf1:age>
     <schema1:language rdf:resource="http://example.org/language/English"/>
