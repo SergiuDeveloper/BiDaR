@@ -184,13 +184,15 @@ class OntologyProcessor:
         elif section == "Skills":
             rel = SDO.skills
         elif section == "Knows":
-            rel = FOAF.knows
+            rel = SDO.knows
         elif section == "Favourite Artists":
             rel = SDO.artist
         else:
             return None
 
         self.__graph.add((person, rel, interest_ref))
+        if section == "Knows":
+            self.__graph.add((interest_ref, rel, person))
 
         self.__graph_lock.release()
         print({"label" : interest_ref.split("/")[-1].replace("_", " "), "ref": interest_ref})
@@ -221,6 +223,8 @@ class OntologyProcessor:
 
         try:
             self.__graph.remove((person, rel, interest_ref))
+            if section == "Knows":
+                self.__graph.remove((interest_ref, rel, person))
         except:
             return False
 

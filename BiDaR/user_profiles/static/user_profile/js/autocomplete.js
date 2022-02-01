@@ -129,11 +129,11 @@ function debounce(func, wait = 350, early = false) {
     };
 }
 
-function add_error(input){
+function add_error(input, message){
     var error = document.getElementById(input.id.split("_")[0] +"_error");
     error.classList = 'alert alert-danger';
     error.role = "alert";
-    error.innerHTML = "Concept does not exist";
+    error.innerHTML = message;
 }
 
 function remove_error(input){
@@ -161,8 +161,11 @@ function add_data(event){
     const section = event.target.id.split("_")[1];
     const input = document.getElementById(section+'_input');
     var interest_ref = input.name;
+    if (section == "Knows"){
+        interest_ref = input.value;
+    }
     if (interest_ref == ""){
-        add_error(input);
+        add_error(input, "Concept does not exist");
         return 0;
     }
     const name = document.getElementById("name").innerHTML;
@@ -172,17 +175,13 @@ function add_data(event){
             var responseText = xmlHttp.responseText;
             var responceJSON = JSON.parse(responseText)
             if (responceJSON == false){
-                add_error(input);
+                add_error(input, "No results for this input");
             }
             else{
                 update_list(responceJSON["label"], responceJSON["ref"], section)
             }
             input.value = "";
         }
-    }
-    
-    if (section == "Knows"){
-        interest_ref = input.value;
     }
 
     xmlHttp.open('POST', `${URL}/add_data`, true);
@@ -197,19 +196,22 @@ function add_data(event){
 
 function remove_data(event){
     const section = event.target.parentNode.parentNode.id.split("_")[0];
-    const name = "Andrei Ghiran"
+    const name = document.getElementById("name").innerHTML;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var responseText = xmlHttp.responseText;
-            var responceJSON = JSON.parse(responseText)
+            var responceJSON = JSON.parse(responseText);
+            if (responceJSON == false){
+                add_error(input, "Error removing data");
+            }
         }
     }
     const data_ref = event.target.previousElementSibling.href;
     xmlHttp.open('POST', `${URL}/remove_data`, true);
     xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xmlHttp.send(JSON.stringify({
-        'name': "Andrei Ghiran",
+        'name': name,
         'data': data_ref,
         "section": section
     }));

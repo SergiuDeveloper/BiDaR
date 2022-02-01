@@ -44,7 +44,7 @@ def ProfiletView(request, user_id):
             interests.append((item[2], item[3]))
         elif item[1] == "skills":
             skills.append((item[2], item[3]))
-        elif item[1] == "knows":
+        elif item[1] == "knows" and item[0] == context["name"]:
             knows.append((item[2], item[3]))
         elif item[1] == "artist":
             artists.append((item[2], item[3]))
