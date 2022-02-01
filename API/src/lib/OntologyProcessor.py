@@ -60,7 +60,7 @@ class OntologyProcessor:
         return final_list
 
     def query_interests(self, name):
-        person = URIRef('http://localhost:8000/profile/{}'.format(name.replace(' ', '_')))
+        person = URIRef(name)
         interests = []
         for predicate in [FOAF.interest, SDO.artist]:
             interests.extend([triple[2] for triple in self.__graph.triples((person, predicate, None))])
@@ -68,9 +68,28 @@ class OntologyProcessor:
         interests = [re.split('/|#', interest.n3())[-1][:-1].replace('_', ' ') for interest in interests]
         
         sparql_processor = SparqlProcessor()
-        results = sparql_processor.query_information_multithreaded(interests, 'en', 5, 5)
+        results = sparql_processor.query_information_multithreaded(interests, 'en', 3, 3)
         return list(set(results))
 
+    def query_related_interests(self, name, nouns):
+        person = URIRef(name)
+        final_results = {}
+        interests = []
+        for predicate in [FOAF.interest, SDO.artist]:
+            interests.extend([triple[2] for triple in self.__graph.triples((person, predicate, None))])
+        interests = [re.split('/|#', interest.n3())[-1][:-1].replace('_', ' ') for interest in interests]
+
+        sparql_processor = SparqlProcessor()
+        for noun in nouns:
+            results = []
+            for interest in interests:
+                if noun != interest:
+                    _, _, processed_triples = sparql_processor.query_information_related_to_interests(noun,interest, 'en', 3)
+                results += processed_triples
+            final_results[noun] = list(set(results))
+
+        return final_results
+    
     def query_all_data(self, name):
         self.__graph_lock.acquire()
         person = URIRef('http://localhost:8000/profile/{}'.format(name.replace(' ', '_')))

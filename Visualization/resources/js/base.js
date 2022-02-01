@@ -204,8 +204,8 @@ function getPersons() {
                 select2.remove(i);
             }
             for (var i = 0; i < persons.length; i++) {
-                select1.options[i] = new Option(persons[i], persons[i]);
-                select2.options[i] = new Option(persons[i], persons[i]);
+                select1.options[i] = new Option(persons[i][0], persons[i][1]);
+                select2.options[i] = new Option(persons[i][0], persons[i][1]);
             }
         }
     }

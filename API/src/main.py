@@ -4,8 +4,6 @@ import traceback
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from rdflib.namespace import FOAF
-
 from lib.TextProcessor import TextProcessor
 from lib.SparqlProcessor import SparqlProcessor
 from lib.OntologyProcessor import OntologyProcessor
@@ -32,8 +30,18 @@ def semantic_web_data():
 
     sparql_processor = SparqlProcessor()
     query_data = sparql_processor.query_information_multithreaded(nouns, language, resultsLimit, searchDepth)
+    result = {}
+    result["graph_data"] = query_data
+    result['nouns'] = nouns
+    return jsonify(result)
 
-    return jsonify(query_data)
+@app.post('/related_to_interests')
+def related_to_interests():
+    user = request.get_json(force=True)['name']
+    nouns = request.get_json(force=True)['nouns']
+    interests = ontology_processor.query_related_interests(user,nouns)
+    result = jsonify(interests)
+    return result
 
 @app.post('/query_all_data')
 def query_all_data():

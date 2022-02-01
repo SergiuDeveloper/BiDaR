@@ -14,13 +14,12 @@
       <div id="forms" class="d-flex flex-column">
           <div class="p-2 d-flex flex-column">
             <label for="textInput">Query Text:</label>
-            <!-- <input class="w-25 h-50" type="text" id="textInput" name="textInput"><br> -->
             <textarea class="form-control" type="text" id="textInput" name="textInput" rows="3"></textarea>
           </div>
           <div class="d-flex">
             <div class="p-2 d-flex flex-column">
               <label for="maxResults">As User:</label>
-              <input type="text" id="asUser" name="asUser"><br>
+              <select type="text" id="pick_user" value=""></select><br>
             </div>
             <div class="p-2 d-flex flex-column">
               <label for="maxResults">Maximum results per concept:</label>
@@ -36,11 +35,15 @@
       <div class="m-2" id="network"></div>
     </div>
     
-    <div id="ceva"></div>
+    <div id="ceva" class="border d-flex flex-column w-50">
+      <h3 class="title">Interest Related to Search Concepts</h3>
+      <ul id="related_interst_list" class="list-group h-100">
+      </ul>
+    </div>
   </div>
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'queries/js/base.js' %}"></script>
 <script type="text/javascript" src="{% static 'queries/js/vis.js' %}"></script>
+<script type="text/javascript" src="{% static 'queries/js/query_maker_base.js' %}"></script>
 {% endblock %}
