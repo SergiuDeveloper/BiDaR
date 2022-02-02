@@ -36,6 +36,14 @@
             <dd>
                 Dr. Sabin-Corneliu Buraga
             </dd>
+            <dt>Resources of interest</dt>
+            <dd>
+                Project <a href="https://github.com/SergiuDeveloper/BiDaR" role="doc-biblioref">Repository</a>
+            </dd>
+            <dd>
+                Project <a href="https://bidar-uaic.000webhostapp.com/" role="doc-biblioref">Blog</a>
+            </dd>
+            
         </dl>
     </div>
 
@@ -136,13 +144,66 @@
             </p>
         </section>
     </section>
-
+    
+    <section id="Aplication dscription">
+        <h2>Application Description</h2>
+        <section id="front-end-description">
+            <h2>User Interface</h2>
+            <section id="front-django-section">
+                <h3>Django framework server</h3>
+                <p>
+                    The <a role="doc-biblioref">Django</a> web server provides the user interface layer witch then is used to make calls to the different API endpoints of our service.
+                    We chose the django framework because it supports a great way to customise the user interface by dynamically generating html files 
+                    by using parts of static HTML code and some special syntax describing how dynamic content will be inserted. This feature allows us to created
+                    a more flexible user interface that can addapt to different data sets provided by the backend portion of the server. One example would be that if
+                    we wanted to add a new category of user-related data, simillar to interests and skills, the html template coresponding to the user profile page 
+                    would be unaffected by this change.
+                </p>
+            </section>
+            <section id="front-bootstrap-section">
+                <h3>Bootstrap</h3>
+                <p>
+                    For the UI styling part we used a combination of css code that we developed and <a role="doc-biblioref">Bootstrap</a> classes. We cose Bootstrap because it simplifies the task of styleing the 
+                    user interface and it is well suited for the development of the minimalist user interface witch we wanted to achieve.
+                </p>
+            </section>
+            <section id="front-javascript-section">
+                <h3>Javascript</h3>
+                <p>
+                    <a role="doc-biblioref">Javascript</a> is mainly used for some calls to the BiDaR API service witch can not be made from the django server. There are some instances where jabascript is used to 
+                    update the information shown in the user interface after a successfull API call, such as when a new interest is added to a user's data or to create the data grapths. 
+                </p>
+            </section>
+        </section>
+        <section id='back-end-description'>
+            <h2>Application Backend</h2>
+            <section id="back-django-section">
+                <h3>Django framework server</h3>
+                <p>
+                    The <a role="doc-biblioref">Django</a> web server is mainly used to provide the user interface layer, but there is a case where it calls the /get_all_data endpoint. It does so when building the 
+                    profile page for a given user. The server uses the endpoint to get all data related and use it to populate the profile page template.
+                </p>
+            </section>
+            <section id="back-javascript-section">
+                <h3>Javascript</h3>
+                <p>
+                    Most calls to out API are made using <a role="doc-biblioref">Javascript</a> scripts. These calls are made either when the page is loaded, to populate different dropdown menus with data from the application, or
+                    they are made when one of the app functionalities are used, such as adding a new user or making a querie.
+                </p>
+                <h3>Flask API</h3>
+                <p>
+                    The <a role="doc-biblioref">Flask</a> API is the main component of the application and as such it will be described in mode detail in the next section.
+                </p>
+            </section>
+        </section>
+        
+    </section>
     <section id="api">
         <h2>API</h2>
         <section id="open-api">
             <h3>OpenAPI Specification</h3>
             <p>
-                The application relies on a <a role="doc-biblioref">Flask</a> REST API in order to handle <a role="doc-biblioref">DBpedia</a> queries and perform additions, updates, deletions, or queries on the internal data model. The <a role="doc-biblioref">OpenAPI</a> specification for the API is the following:
+                The application relies on a REST API in order to handle DBpedia queries and perform additions, updates, deletions, or queries on the internal data model. The <a role="doc-biblioref">OpenAPI</a> specification for the API is the following:
                 <div id="swagger-ui"></div>
             </p>
         </section>
@@ -274,35 +335,6 @@
                         </center>
                     </figure>
                 </section>
-            </p>
-        </section>
-    </section>
-
-    <section id="Aplication dscription">
-        <h2>User Interface Layer</h2>
-        <section id="django-section">
-            <h3>Django framework server</h3>
-            <p>
-                The <a role="doc-biblioref">Django</a> web server provides the user interface layer witch then is used to make calls to the different API endpoints of our service.
-                We chose the django framework because it supports a great way to customise the user interface by dynamically generating html files 
-                by using parts of static HTML code and some special syntax describing how dynamic content will be inserted. This feature allows us to created
-                a more flexible user interface that can addapt to different data sets provided by the backend portion of the server. One example would be that if
-                we wanted to add a new category of user-related data, simillar to interests and skills, the html template coresponding to the user profile page 
-                would be unaffected by this change.
-            </p>
-        </section>
-        <section id="bootstrap-section">
-            <h3>Bootstrap</h3>
-            <p>
-                For the UI styling part we used a combination of css code that we developed and <a role="doc-biblioref">Bootstrap</a> classes. We cose Bootstrap because it simplifies the task of styleing the 
-                user interface and it is well suited for the development of the minimalist user interface witch we wanted to achieve.
-            </p>
-        </section>
-        <section id="javascript-section">
-            <h3>Javascript</h3>
-            <p>
-                <a role="doc-biblioref">Javascript</a> is mainly used for some calls to the BiDaR API service witch can not be made from the django server. There are some instances where jabascript is used to 
-                update the information shown in the user interface after a successfull API call, such as when a new interest is added to a user's data or to create the data grapths. 
             </p>
         </section>
     </section>

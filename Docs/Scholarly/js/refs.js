@@ -59,10 +59,10 @@ let refs = {
       <cite property="schema:name"><a href="https://www.javascript.com/">Javascript</a></cite>.
     </dd>
     `,
-	Flask: `
-	<dd property="schema:citation" typeof="schema:WebPage"
+    Flask: `
+    <dd property="schema:citation" typeof="schema:WebPage"
         resource="https://flask.palletsprojects.com/en/2.0.x/">
       <cite property="schema:name"><a href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a></cite>.
     </dd>
-	`
+    `
 };
